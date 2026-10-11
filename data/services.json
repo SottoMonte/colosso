@@ -5,14 +5,15 @@
       "name": "Smartphone e tablet",
       "category": "Riparazioni",
       "kind": "Intervento tecnico",
-      "format": "Intervento su preventivo",
+      "format": "Da 39 €; prezzo finale su preventivo",
       "price": 39,
       "price_period": "una tantum",
-      "description": "Diagnosi e riparazione di smartphone e tablet. Prima dell'intervento valutiamo il guasto e condividiamo la soluzione proposta.",
+      "description": "Prezzo di partenza per interventi semplici. Il costo finale dipende da modello e guasto; ricambi esclusi e preventivo approvato prima di procedere.",
       "image": "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=1000&q=85",
       "specifications": [
         { "label": "Dispositivi", "value": "Smartphone e tablet" },
-        { "label": "Percorso", "value": "Verifica del guasto, proposta e intervento" }
+        { "label": "Intervento", "value": "Diagnosi e riparazione con prezzo concordato" },
+        { "label": "Extra", "value": "Ricambi e lavorazioni aggiuntive su preventivo" }
       ],
       "featured": true,
       "available": true
@@ -22,14 +23,15 @@
       "name": "PC, notebook e postazioni",
       "category": "Riparazioni",
       "kind": "Intervento tecnico",
-      "format": "Intervento su preventivo",
+      "format": "Da 49 € in laboratorio; domicilio su preventivo",
       "price": 49,
       "price_period": "una tantum",
-      "description": "Assistenza hardware e software, configurazione e manutenzione di computer e postazioni di lavoro.",
+      "description": "Prezzo indicativo per interventi semplici di software o manutenzione in laboratorio. Ricambi esclusi; riparazioni complesse e interventi a domicilio sono preventivati prima di procedere.",
       "image": "https://images.unsplash.com/photo-1587202372634-32705e3bf49c?auto=format&fit=crop&w=1000&q=85",
       "specifications": [
         { "label": "Dispositivi", "value": "PC desktop e notebook" },
-        { "label": "Supporto", "value": "Hardware, software e configurazione" }
+        { "label": "Prezzo base", "value": "Da 49 € per interventi semplici in laboratorio" },
+        { "label": "Extra", "value": "Ricambi, uscita e interventi complessi su preventivo" }
       ],
       "featured": true,
       "available": true
@@ -39,14 +41,15 @@
       "name": "Elettronica ed elettrodomestici",
       "category": "Riparazioni",
       "kind": "Intervento tecnico",
-      "format": "Valutazione su richiesta",
-      "price": 59,
+      "format": "Uscita e diagnosi da 49 €; riparazione su preventivo",
+      "price": 49,
       "price_period": "una tantum",
-      "description": "Valutazione di dispositivi elettronici e apparecchi domestici in base a marca, modello e tipo di guasto.",
+      "description": "Per gli elettrodomestici, prezzo indicativo per uscita e diagnosi standard nell'area concordata. Riparazione, ricambi, urgenze e dispositivi elettronici sono quotati separatamente; costi e copertura si confermano prima dell'appuntamento.",
       "image": "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1000&q=85",
       "specifications": [
-        { "label": "Ambito", "value": "Elettronica e apparecchi domestici" },
-        { "label": "Verifica", "value": "Disponibilità e fattibilità da confermare" }
+        { "label": "Ambito", "value": "Elettrodomestici; elettronica valutata su richiesta" },
+        { "label": "Incluso", "value": "Uscita e diagnosi standard, previa conferma della copertura" },
+        { "label": "Extra", "value": "Riparazione, ricambi e urgenze su preventivo" }
       ],
       "featured": false,
       "available": true
@@ -56,14 +59,15 @@
       "name": "Domini e hosting",
       "category": "Servizi digitali",
       "kind": "Servizio continuativo",
-      "format": "Soluzione su misura",
-      "price": 119,
+      "format": "Pacchetto gestito, canone annuale",
+      "price": 99,
       "price_period": "annuale",
-      "description": "Registrazione e gestione del dominio, hosting e supporto tecnico per la presenza online della tua attività.",
+      "description": "Canone annuale per un dominio .it, hosting, SSL, backup automatici e fino a un'ora di supporto tecnico. Migrazioni, risorse aggiuntive e interventi oltre il limite sono preventivati a parte. Alternativa a Colosso Web per le stesse risorse.",
       "image": "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=1000&q=85",
       "specifications": [
-        { "label": "Dominio", "value": "Registrazione e gestione" },
-        { "label": "Hosting", "value": "Risorse da definire in base al progetto" }
+        { "label": "Dominio", "value": "Un dominio .it, registrazione e rinnovo annuale" },
+        { "label": "Hosting", "value": "Hosting, certificato SSL e backup automatici" },
+        { "label": "Supporto", "value": "Fino a un'ora l'anno; attività extra su preventivo" }
       ],
       "featured": true,
       "available": true
@@ -73,14 +77,15 @@
       "name": "Siti web",
       "category": "Servizi digitali",
       "kind": "Progetto",
-      "format": "Progetto su misura",
+      "format": "Sito vetrina fino a 5 pagine",
       "price": 790,
       "price_period": "una tantum",
-      "description": "Siti vetrina e soluzioni web progettati intorno ai contenuti, alle persone e agli obiettivi della tua attività.",
+      "description": "Prezzo di partenza per un sito vetrina responsive fino a 5 pagine, con modulo contatti e SEO di base. Testi e immagini sono forniti dal cliente; e-commerce, dominio, hosting, email, funzioni aggiuntive e manutenzione ricorrente sono esclusi o quotati a parte.",
       "image": "https://images.unsplash.com/photo-1547658719-da2b51169166?auto=format&fit=crop&w=1000&q=85",
       "specifications": [
-        { "label": "Progetto", "value": "Struttura e contenuti concordati" },
-        { "label": "Esperienza", "value": "Progettazione per desktop e dispositivi mobili" }
+        { "label": "Pagine", "value": "Fino a 5 pagine per un sito vetrina" },
+        { "label": "Incluso", "value": "Design responsive, modulo contatti e SEO di base" },
+        { "label": "Escluso", "value": "Contenuti, e-commerce e canoni ricorrenti" }
       ],
       "featured": false,
       "available": true
@@ -91,13 +96,14 @@
       "category": "Servizi digitali",
       "kind": "Servizio continuativo",
       "format": "Per casella, canone mensile",
-      "price": 5.9,
+      "price": 4.9,
       "price_period": "mensile",
-      "description": "Caselle email con il dominio aziendale, configurazione dei dispositivi e supporto per la gestione quotidiana.",
+      "description": "Canone indicativo per una casella sul dominio aziendale, con supporto di base alla configurazione. Dominio, migrazioni, spazio aggiuntivo e licenze premium non sono inclusi; configurazioni complesse e interventi extra sono quotati a parte.",
       "image": "https://images.unsplash.com/photo-1523474253046-8cd2748b5fd2?auto=format&fit=crop&w=1000&q=85",
       "specifications": [
-        { "label": "Indirizzi", "value": "Configurazione su dominio aziendale" },
-        { "label": "Dispositivi", "value": "Impostazione sui dispositivi concordati" }
+        { "label": "Canone", "value": "Per singola casella email" },
+        { "label": "Dominio", "value": "Dominio aziendale necessario, non incluso" },
+        { "label": "Supporto", "value": "Configurazione base; migrazioni e interventi extra su preventivo" }
       ],
       "featured": false,
       "available": true
@@ -107,14 +113,15 @@
       "name": "Applicazioni e software",
       "category": "Servizi digitali",
       "kind": "Progetto",
-      "format": "Progetto su misura",
+      "format": "Da 1.200 € per micro-strumenti; altri progetti a preventivo",
       "price": 1200,
       "price_period": "una tantum",
-      "description": "Applicazioni e strumenti digitali pensati per organizzare informazioni e attività specifiche della tua impresa.",
+      "description": "Prezzo di partenza per un micro-strumento con una funzione principale e un perimetro definito. Non è il prezzo di un'app completa o di un gestionale. Integrazioni, API, licenze, hosting, manutenzione e funzionalità aggiuntive sono quotati a parte.",
       "image": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1000&q=85",
       "specifications": [
-        { "label": "Analisi", "value": "Esigenze e flussi da definire insieme" },
-        { "label": "Soluzione", "value": "Funzionalità e tempi su proposta" }
+        { "label": "Perimetro", "value": "Una funzione principale, definita prima dello sviluppo" },
+        { "label": "Progetti complessi", "value": "App e gestionali completi su preventivo" },
+        { "label": "Extra", "value": "Licenze, hosting, API e manutenzione separati" }
       ],
       "featured": false,
       "available": true
@@ -124,14 +131,15 @@
       "name": "Automazione dei processi",
       "category": "Automazioni",
       "kind": "Progetto",
-      "format": "Analisi e progetto su misura",
+      "format": "Da 490 € per un singolo flusso semplice",
       "price": 490,
       "price_period": "una tantum",
-      "description": "Individuiamo le attività ripetitive e progettiamo automazioni per ridurre passaggi manuali e collegare gli strumenti già in uso.",
+      "description": "Prezzo di partenza per analisi e realizzazione di un solo flusso semplice con strumenti già disponibili. Licenze, servizi cloud o AI, integrazioni personalizzate, flussi aggiuntivi e manutenzione ricorrente sono esclusi e quotati a parte.",
       "image": "https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=1000&q=85",
       "specifications": [
-        { "label": "Partenza", "value": "Mappatura del processo" },
-        { "label": "Risultato", "value": "Flusso e strumenti definiti in proposta" }
+        { "label": "Incluso", "value": "Mappatura e un flusso semplice concordato" },
+        { "label": "Costi esterni", "value": "Licenze, consumi cloud e AI esclusi" },
+        { "label": "Estensioni", "value": "Altri flussi e integrazioni su preventivo" }
       ],
       "featured": true,
       "available": true
@@ -141,14 +149,16 @@
       "name": "Gestione marketing",
       "category": "Marketing",
       "kind": "Servizio continuativo",
-      "format": "Piano mensile o progetto",
+      "format": "Starter mensile: fino a 2 canali e 8 contenuti",
       "price": 290,
       "price_period": "mensile",
-      "description": "Supporto alla gestione della presenza digitale e delle attività di marketing, con obiettivi e canali da concordare.",
+      "description": "Pacchetto mensile con gestione di fino a 2 canali, 8 contenuti organici, report mensile e confronto strategico. Il budget pubblicitario e le attività non comprese nel pacchetto sono esclusi e quotati a parte.",
       "image": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1000&q=85",
       "specifications": [
-        { "label": "Piano", "value": "Attività e priorità concordate" },
-        { "label": "Canali", "value": "Da selezionare in base al progetto" }
+        { "label": "Contenuti", "value": "Fino a 8 contenuti organici al mese" },
+        { "label": "Canali", "value": "Fino a 2 canali social" },
+        { "label": "Report", "value": "Report mensile e confronto strategico" },
+        { "label": "Escluso", "value": "Budget delle campagne pubblicitarie" }
       ],
       "featured": false,
       "available": true
@@ -158,14 +168,15 @@
       "name": "Colosso Care",
       "category": "Abbonamenti",
       "kind": "Pacchetto in abbonamento",
-      "format": "Canone ricorrente su misura",
+      "format": "Canone mensile: fino a 3 dispositivi e 1 ora da remoto",
       "price": 79,
       "price_period": "mensile",
-      "description": "Un riferimento continuativo per l'assistenza tecnica di dispositivi e strumenti digitali. Perimetro e modalità si definiscono in base alle tue esigenze.",
+      "description": "Assistenza remota continuativa per un massimo di 3 dispositivi, con un'ora di supporto inclusa al mese. Ore aggiuntive, interventi in sede, ricambi, licenze e assistenza fuori orario sono esclusi e quotati a parte.",
       "image": "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=1000&q=85",
       "specifications": [
-        { "label": "Adatto a", "value": "Persone e piccoli team" },
-        { "label": "Formula", "value": "Attività e frequenza concordate" }
+        { "label": "Dispositivi", "value": "Fino a 3 dispositivi" },
+        { "label": "Supporto", "value": "1 ora al mese da remoto" },
+        { "label": "Extra", "value": "Uscite, ricambi, licenze e ore aggiuntive su preventivo" }
       ],
       "featured": false,
       "available": true
@@ -175,14 +186,16 @@
       "name": "Colosso Web",
       "category": "Abbonamenti",
       "kind": "Pacchetto in abbonamento",
-      "format": "Canone ricorrente su misura",
+      "format": "Canone mensile; realizzazione iniziale del sito separata",
       "price": 29,
       "price_period": "mensile",
-      "description": "Una formula personalizzabile per dominio, hosting, email e gestione del sito, con componenti e livello di supporto definiti in proposta.",
+      "description": "Canone per un dominio .it, hosting, SSL, backup, una casella email e gestione tecnica di base del sito, con fino a 30 minuti di supporto remoto al mese. Realizzazione iniziale, nuove pagine, modifiche ai contenuti e servizi extra sono quotati a parte. Alternativa a Domini e hosting: non si sommano per le stesse risorse.",
       "image": "https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?auto=format&fit=crop&w=1000&q=85",
       "specifications": [
-        { "label": "Servizi", "value": "Dominio, hosting, email e sito" },
-        { "label": "Formula", "value": "Perimetro e canone concordati" }
+        { "label": "Incluso", "value": "Dominio .it, hosting, SSL, backup e una casella email" },
+        { "label": "Supporto", "value": "Fino a 30 minuti al mese da remoto" },
+        { "label": "Escluso", "value": "Creazione iniziale del sito, nuove pagine e modifiche ai contenuti" },
+        { "label": "Compatibilità", "value": "Alternativa a Domini e hosting per le stesse risorse" }
       ],
       "featured": false,
       "available": true
@@ -192,14 +205,15 @@
       "name": "Colosso Business",
       "category": "Abbonamenti",
       "kind": "Pacchetto in abbonamento",
-      "format": "Canone ricorrente su misura",
+      "format": "Canone mensile: fino a 5 postazioni e 2 ore da remoto",
       "price": 149,
       "price_period": "mensile",
-      "description": "Un percorso continuativo per assistenza IT, automazioni e servizi digitali aziendali, costruito su obiettivi e priorità concordati.",
+      "description": "Assistenza IT da remoto per un massimo di 5 postazioni, con 2 ore di helpdesk incluse al mese. Interventi in sede, ricambi, licenze, automazioni, sviluppi personalizzati e ore aggiuntive sono esclusi e quotati a parte.",
       "image": "https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1000&q=85",
       "specifications": [
-        { "label": "Adatto a", "value": "Attività e imprese" },
-        { "label": "Formula", "value": "Servizi e priorità concordati" }
+        { "label": "Postazioni", "value": "Fino a 5 postazioni" },
+        { "label": "Helpdesk", "value": "2 ore al mese da remoto" },
+        { "label": "Extra", "value": "Uscite, licenze, progetti e ore aggiuntive su preventivo" }
       ],
       "featured": false,
       "available": true

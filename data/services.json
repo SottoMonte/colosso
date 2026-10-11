@@ -1,0 +1,184 @@
+{
+  "services": [
+    {
+      "id": "riparazione-smartphone-tablet",
+      "name": "Smartphone e tablet",
+      "category": "Riparazioni",
+      "kind": "Intervento tecnico",
+      "format": "Intervento su preventivo",
+      "description": "Diagnosi e riparazione di smartphone e tablet. Prima dell'intervento valutiamo il guasto e condividiamo la soluzione proposta.",
+      "image": "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=1000&q=85",
+      "specifications": [
+        { "label": "Dispositivi", "value": "Smartphone e tablet" },
+        { "label": "Percorso", "value": "Verifica del guasto, proposta e intervento" }
+      ],
+      "featured": true,
+      "available": true
+    },
+    {
+      "id": "riparazione-pc-computer",
+      "name": "PC, notebook e postazioni",
+      "category": "Riparazioni",
+      "kind": "Intervento tecnico",
+      "format": "Intervento su preventivo",
+      "description": "Assistenza hardware e software, configurazione e manutenzione di computer e postazioni di lavoro.",
+      "image": "https://images.unsplash.com/photo-1587202372634-32705e3bf49c?auto=format&fit=crop&w=1000&q=85",
+      "specifications": [
+        { "label": "Dispositivi", "value": "PC desktop e notebook" },
+        { "label": "Supporto", "value": "Hardware, software e configurazione" }
+      ],
+      "featured": true,
+      "available": true
+    },
+    {
+      "id": "riparazione-elettronica-elettrodomestici",
+      "name": "Elettronica ed elettrodomestici",
+      "category": "Riparazioni",
+      "kind": "Intervento tecnico",
+      "format": "Valutazione su richiesta",
+      "description": "Valutazione di dispositivi elettronici e apparecchi domestici in base a marca, modello e tipo di guasto.",
+      "image": "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1000&q=85",
+      "specifications": [
+        { "label": "Ambito", "value": "Elettronica e apparecchi domestici" },
+        { "label": "Verifica", "value": "Disponibilità e fattibilità da confermare" }
+      ],
+      "featured": false,
+      "available": true
+    },
+    {
+      "id": "domini-hosting",
+      "name": "Domini e hosting",
+      "category": "Servizi digitali",
+      "kind": "Servizio continuativo",
+      "format": "Soluzione su misura",
+      "description": "Registrazione e gestione del dominio, hosting e supporto tecnico per la presenza online della tua attività.",
+      "image": "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=1000&q=85",
+      "specifications": [
+        { "label": "Dominio", "value": "Registrazione e gestione" },
+        { "label": "Hosting", "value": "Risorse da definire in base al progetto" }
+      ],
+      "featured": true,
+      "available": true
+    },
+    {
+      "id": "siti-web",
+      "name": "Siti web",
+      "category": "Servizi digitali",
+      "kind": "Progetto",
+      "format": "Progetto su misura",
+      "description": "Siti vetrina e soluzioni web progettati intorno ai contenuti, alle persone e agli obiettivi della tua attività.",
+      "image": "https://images.unsplash.com/photo-1547658719-da2b51169166?auto=format&fit=crop&w=1000&q=85",
+      "specifications": [
+        { "label": "Progetto", "value": "Struttura e contenuti concordati" },
+        { "label": "Esperienza", "value": "Progettazione per desktop e dispositivi mobili" }
+      ],
+      "featured": false,
+      "available": true
+    },
+    {
+      "id": "email-aziendale",
+      "name": "Email professionale",
+      "category": "Servizi digitali",
+      "kind": "Servizio continuativo",
+      "format": "Configurazione su dominio",
+      "description": "Caselle email con il dominio aziendale, configurazione dei dispositivi e supporto per la gestione quotidiana.",
+      "image": "https://images.unsplash.com/photo-1523474253046-8cd2748b5fd2?auto=format&fit=crop&w=1000&q=85",
+      "specifications": [
+        { "label": "Indirizzi", "value": "Configurazione su dominio aziendale" },
+        { "label": "Dispositivi", "value": "Impostazione sui dispositivi concordati" }
+      ],
+      "featured": false,
+      "available": true
+    },
+    {
+      "id": "applicazioni-software",
+      "name": "Applicazioni e software",
+      "category": "Servizi digitali",
+      "kind": "Progetto",
+      "format": "Progetto su misura",
+      "description": "Applicazioni e strumenti digitali pensati per organizzare informazioni e attività specifiche della tua impresa.",
+      "image": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1000&q=85",
+      "specifications": [
+        { "label": "Analisi", "value": "Esigenze e flussi da definire insieme" },
+        { "label": "Soluzione", "value": "Funzionalità e tempi su proposta" }
+      ],
+      "featured": false,
+      "available": true
+    },
+    {
+      "id": "automazione-processi",
+      "name": "Automazione dei processi",
+      "category": "Automazioni",
+      "kind": "Progetto",
+      "format": "Analisi e progetto su misura",
+      "description": "Individuiamo le attività ripetitive e progettiamo automazioni per ridurre passaggi manuali e collegare gli strumenti già in uso.",
+      "image": "https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=1000&q=85",
+      "specifications": [
+        { "label": "Partenza", "value": "Mappatura del processo" },
+        { "label": "Risultato", "value": "Flusso e strumenti definiti in proposta" }
+      ],
+      "featured": true,
+      "available": true
+    },
+    {
+      "id": "gestione-marketing",
+      "name": "Gestione marketing",
+      "category": "Marketing",
+      "kind": "Servizio continuativo",
+      "format": "Piano mensile o progetto",
+      "description": "Supporto alla gestione della presenza digitale e delle attività di marketing, con obiettivi e canali da concordare.",
+      "image": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1000&q=85",
+      "specifications": [
+        { "label": "Piano", "value": "Attività e priorità concordate" },
+        { "label": "Canali", "value": "Da selezionare in base al progetto" }
+      ],
+      "featured": false,
+      "available": true
+    },
+    {
+      "id": "abbonamento-colosso-care",
+      "name": "Colosso Care",
+      "category": "Abbonamenti",
+      "kind": "Pacchetto in abbonamento",
+      "format": "Canone ricorrente su misura",
+      "description": "Un riferimento continuativo per l'assistenza tecnica di dispositivi e strumenti digitali. Perimetro e modalità si definiscono in base alle tue esigenze.",
+      "image": "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=1000&q=85",
+      "specifications": [
+        { "label": "Adatto a", "value": "Persone e piccoli team" },
+        { "label": "Formula", "value": "Attività e frequenza concordate" }
+      ],
+      "featured": false,
+      "available": true
+    },
+    {
+      "id": "abbonamento-colosso-web",
+      "name": "Colosso Web",
+      "category": "Abbonamenti",
+      "kind": "Pacchetto in abbonamento",
+      "format": "Canone ricorrente su misura",
+      "description": "Una formula personalizzabile per dominio, hosting, email e gestione del sito, con componenti e livello di supporto definiti in proposta.",
+      "image": "https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?auto=format&fit=crop&w=1000&q=85",
+      "specifications": [
+        { "label": "Servizi", "value": "Dominio, hosting, email e sito" },
+        { "label": "Formula", "value": "Perimetro e canone concordati" }
+      ],
+      "featured": false,
+      "available": true
+    },
+    {
+      "id": "abbonamento-colosso-business",
+      "name": "Colosso Business",
+      "category": "Abbonamenti",
+      "kind": "Pacchetto in abbonamento",
+      "format": "Canone ricorrente su misura",
+      "description": "Un percorso continuativo per assistenza IT, automazioni e servizi digitali aziendali, costruito su obiettivi e priorità concordati.",
+      "image": "https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1000&q=85",
+      "specifications": [
+        { "label": "Adatto a", "value": "Attività e imprese" },
+        { "label": "Formula", "value": "Servizi e priorità concordati" }
+      ],
+      "featured": false,
+      "available": true
+    }
+  ]
+}

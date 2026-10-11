@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="it">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#d9fa52" />
+    <meta name="description" content="Scopri i servizi Colosso: riparazioni, hosting, domini, siti web, email, applicazioni, automazioni e marketing." />
+    <title>Servizi e soluzioni — Colosso</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="site.css?v=3" />
+    <script src="site.js?v=2" defer></script>
+  </head>
+  <body data-page="catalog">
+    <a class="skip-link" href="#main">Salta al contenuto</a>
+
+    <div class="topline" id="topline">
+      <div class="topline__inner">
+        <span class="topline__signal"><span class="topline__dot" aria-hidden="true"></span> Assistenza IT · Riparazioni · Soluzioni digitali</span>
+        <span>Per persone e imprese</span>
+      </div>
+    </div>
+
+    <header class="site-header">
+      <div class="site-header__inner">
+        <a class="brand" href="index.html#inizio" aria-label="Colosso, torna all'inizio">
+          <span class="brand__mark" aria-hidden="true">C.</span>
+          <span class="brand__name" data-brand>Colosso</span>
+        </a>
+        <button class="menu-toggle" id="menu-toggle" type="button" aria-label="Apri il menu" aria-controls="primary-navigation" aria-expanded="false">
+          <span></span>
+          <span></span>
+        </button>
+        <nav class="primary-nav" id="primary-navigation" aria-label="Navigazione principale">
+          <details class="nav-dropdown">
+            <summary>Catalogo</summary>
+            <div class="nav-dropdown__menu">
+              <a href="catalogo.html">Tutti i servizi</a>
+              <a href="catalogo.html?categoria=Riparazioni">Riparazioni</a>
+              <a href="catalogo.html?categoria=Servizi%20digitali">Servizi digitali</a>
+              <a href="catalogo.html?categoria=Automazioni">Automazioni</a>
+              <a href="catalogo.html?categoria=Marketing">Marketing</a>
+              <a href="catalogo.html?categoria=Abbonamenti">Abbonamenti</a>
+            </div>
+          </details>
+          <a href="index.html#imprese">Per le imprese</a>
+          <a href="index.html#buoni">Buoni Cartaway</a>
+        </nav>
+        <a class="cart-link" data-cart-link href="carrello.html" aria-label="Carrello, 0 articoli">
+          <svg class="cart-link__icon" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3h2l2.2 11.3a2 2 0 0 0 2 1.7h8.5a2 2 0 0 0 2-1.6L21 8H6" /><circle cx="10" cy="20" r="1.4" /><circle cx="18" cy="20" r="1.4" /></svg>
+          <span class="cart-link__label">Carrello</span>
+          <span class="cart-count" data-cart-count aria-live="polite">0</span>
+          <span class="visually-hidden" id="cart-feedback" role="status" aria-live="polite"></span>
+        </a>
+        <a class="button button--small" href="index.html#contatti">Parliamone <span class="button__arrow" aria-hidden="true">↗</span></a>
+      </div>
+    </header>
+
+    <main class="catalog-main" id="main">
+      <section class="section-wrap page-heading" aria-labelledby="catalog-title">
+        <nav class="breadcrumbs" aria-label="Percorso di navigazione">
+          <a href="index.html">Home</a><span class="breadcrumbs__separator" aria-hidden="true">/</span><span aria-current="page">Servizi</span>
+        </nav>
+        <div class="page-heading__row">
+          <div>
+            <p class="eyebrow">Il catalogo Colosso</p>
+            <h1 id="catalog-title">Servizi e soluzioni.</h1>
+          </div>
+          <p class="page-heading__intro" data-intro>Dall'assistenza tecnica alle soluzioni digitali per il lavoro di ogni giorno. Ogni proposta parte dalle tue necessità.</p>
+        </div>
+      </section>
+
+      <section class="section-wrap catalog-content" aria-label="Elenco servizi">
+        <div class="catalog-controls">
+          <label class="field-label"><span>Cerca un servizio</span><input id="service-search" type="search" placeholder="Es. riparazioni, email, hosting" autocomplete="off" /></label>
+          <label class="field-label"><span>Area</span><select id="service-category"><option value="tutte">Tutte le aree</option></select></label>
+          <label class="field-label"><span>Ordina</span><select id="service-sort"><option value="featured">In evidenza</option><option value="az">Nome A-Z</option></select></label>
+        </div>
+        <p class="catalog-status" id="catalog-status" role="status" aria-live="polite">Carico i servizi…</p>
+        <div class="service-grid" id="service-grid"></div>
+        <div class="empty-state" id="catalog-empty" hidden>
+          <h2>Nessun servizio trovato.</h2>
+          <p>Prova a cambiare ricerca o area.</p>
+        </div>
+      </section>
+
+      <section class="contact-band" aria-labelledby="catalog-contact-title">
+        <div class="contact-band__inner">
+          <div>
+            <h2 id="catalog-contact-title">Hai un'esigenza specifica?</h2>
+            <p>Descrivici il caso, anche se non trovi qui la voce giusta. Se hai un buono Cartaway puoi aggiungerne il codice alla richiesta.</p>
+          </div>
+          <a class="button" href="index.html#contatti">Parliamone <span class="button__arrow" aria-hidden="true">↗</span></a>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="site-footer__main">
+        <div class="site-footer__brand">
+          <a class="brand brand--footer" href="index.html#inizio" aria-label="Colosso, torna all'inizio">
+            <span class="brand__mark" aria-hidden="true">C.</span>
+            <span class="brand__name" data-brand>Colosso</span>
+          </a>
+          <p class="site-footer__copy" data-tagline>Assistenza tecnica e soluzioni digitali, senza complicazioni.</p>
+        </div>
+        <div class="site-footer__contact-block">
+          <h2>Contatti</h2>
+          <a data-whatsapp-link target="_blank" rel="noopener noreferrer" hidden>Ordina su WhatsApp <span aria-hidden="true">↗</span></a>
+          <a data-phone-link hidden></a>
+          <a data-email-link hidden></a>
+          <p data-address hidden></p>
+        </div>
+      </div>
+      <section class="site-footer__legal" id="legal-details" aria-labelledby="legal-details-title">
+          <h2 id="legal-details-title">Dati dell'impresa</h2>
+          <dl id="legal-details-list"></dl>
+        </section>
+        <div class="site-footer__bottom">
+          <span>© <span data-current-year></span> <span data-brand>Colosso</span></span>
+          <span>Servizi e condizioni confermati prima dell'acquisto.</span>
+          <a href="#topline">Torna su <span aria-hidden="true">↑</span></a>
+        </div>
+    </footer>
+  </body>
+</html>

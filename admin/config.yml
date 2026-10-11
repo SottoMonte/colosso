@@ -1,0 +1,106 @@
+backend:
+  name: turbo-github
+  repo: "OWNER/REPOSITORY"
+  turbo_site_id: "SOSTITUISCI-CON-LA-SITE-ID-DECAP-TURBO"
+  branch: main
+
+locale: it
+publish_mode: simple
+media_folder: uploads
+public_folder: /uploads
+
+collections:
+  - name: impostazioni
+    label: Impostazioni sito
+    files:
+      - name: azienda
+        label: Azienda e contatti
+        file: data/site.json
+        fields:
+          - { label: Nome attività, name: brand, widget: string }
+          - { label: Frase introduttiva, name: tagline, widget: string }
+          - { label: Presentazione, name: intro, widget: text }
+          - { label: Nota sui contatti, name: contact_note, widget: string, required: false }
+          - { label: Zona o modalità di assistenza, name: coverage, widget: string, required: false }
+          - { label: Indirizzo pubblico, name: address, widget: string, required: false }
+          - { label: Telefono, name: phone, widget: string, required: false }
+          - label: Numero WhatsApp
+            name: whatsapp
+            widget: string
+            required: false
+            hint: Inserisci il numero completo con prefisso internazionale, solo cifre.
+          - { label: Email di contatto, name: email, widget: string, required: false }
+          - label: Dati dell'impresa
+            name: legal
+            widget: object
+            fields:
+              - { label: Titolare o denominazione, name: holder, widget: string, required: false }
+              - { label: Forma giuridica, name: legal_form, widget: string, required: false }
+              - { label: Sede legale, name: registered_office, widget: string, required: false }
+              - { label: Partita IVA, name: vat_number, widget: string, required: false }
+              - { label: Numero REA, name: rea, widget: string, required: false }
+
+  - name: catalogo
+    label: Servizi e pacchetti
+    files:
+      - name: servizi
+        label: Offerte Colosso
+        file: data/services.json
+        fields:
+          - label: Servizi e pacchetti
+            name: services
+            widget: list
+            label_singular: offerta
+            fields:
+              - label: ID univoco
+                name: id
+                widget: string
+                hint: Breve, univoco e senza spazi; per esempio riparazione-smartphone-tablet.
+              - { label: Nome servizio o pacchetto, name: name, widget: string }
+              - label: Categoria
+                name: category
+                widget: select
+                options:
+                  - Riparazioni
+                  - Servizi digitali
+                  - Automazioni
+                  - Marketing
+                  - Abbonamenti
+              - label: Tipologia
+                name: kind
+                widget: select
+                options:
+                  - Intervento tecnico
+                  - Progetto
+                  - Servizio continuativo
+                  - Pacchetto in abbonamento
+              - { label: Formula o modalità, name: format, widget: string }
+              - label: Prezzo in euro
+                name: price
+                widget: number
+                value_type: float
+                min: 0
+                step: 0.01
+                required: false
+                hint: Lascia vuoto per le offerte da preventivare.
+              - label: Periodo del prezzo
+                name: price_period
+                widget: select
+                options:
+                  - una tantum
+                  - mensile
+                  - annuale
+                default: una tantum
+                required: false
+              - { label: Descrizione, name: description, widget: text, required: false }
+              - { label: Immagine, name: image, widget: image, required: false }
+              - label: Aspetti del servizio
+                name: specifications
+                widget: list
+                required: false
+                label_singular: dettaglio
+                fields:
+                  - { label: Aspetto, name: label, widget: string }
+                  - { label: Valore, name: value, widget: string }
+              - { label: Mostra in home, name: featured, widget: boolean, default: false }
+              - { label: Disponibile, name: available, widget: boolean, default: true }

@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="it">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#d9fa52" />
+    <meta name="description" content="Colosso: assistenza tecnica, riparazioni elettroniche, servizi digitali e automazioni per persone e imprese." />
+    <title>Colosso — Assistenza tecnica e soluzioni digitali</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="site.css?v=4" />
+    <script src="site.js?v=4" defer></script>
+  </head>
+  <body data-page="home">
+    <a class="skip-link" href="#main">Salta al contenuto</a>
+
+    <div class="topline" id="topline">
+      <div class="topline__inner">
+        <span class="topline__signal"><span class="topline__dot" aria-hidden="true"></span> Assistenza IT · Riparazioni · Soluzioni digitali</span>
+        <span>Per persone e imprese</span>
+      </div>
+    </div>
+
+    <header class="site-header">
+      <div class="site-header__inner">
+        <a class="brand" href="index.html#inizio" aria-label="Colosso, torna all'inizio">
+          <span class="brand__mark" aria-hidden="true">C.</span>
+          <span class="brand__name" data-brand>Colosso</span>
+        </a>
+        <button class="menu-toggle" id="menu-toggle" type="button" aria-label="Apri il menu" aria-controls="primary-navigation" aria-expanded="false">
+          <span></span>
+          <span></span>
+        </button>
+        <nav class="primary-nav" id="primary-navigation" aria-label="Navigazione principale">
+          <details class="nav-dropdown">
+            <summary>Catalogo</summary>
+            <div class="nav-dropdown__menu">
+              <a href="catalogo.html">Tutti i servizi</a>
+              <a href="catalogo.html?categoria=Riparazioni">Riparazioni</a>
+              <a href="catalogo.html?categoria=Servizi%20digitali">Servizi digitali</a>
+              <a href="catalogo.html?categoria=Automazioni">Automazioni</a>
+              <a href="catalogo.html?categoria=Marketing">Marketing</a>
+              <a href="catalogo.html?categoria=Abbonamenti">Abbonamenti</a>
+            </div>
+          </details>
+          <a href="#imprese">Per le imprese</a>
+          <a href="#buoni">Buoni Cartaway</a>
+        </nav>
+        <a class="cart-link" data-cart-link href="carrello.html" aria-label="Carrello, 0 articoli">
+          <svg class="cart-link__icon" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3h2l2.2 11.3a2 2 0 0 0 2 1.7h8.5a2 2 0 0 0 2-1.6L21 8H6" /><circle cx="10" cy="20" r="1.4" /><circle cx="18" cy="20" r="1.4" /></svg>
+          <span class="cart-link__label">Carrello</span>
+          <span class="cart-count" data-cart-count aria-live="polite">0</span>
+          <span class="visually-hidden" id="cart-feedback" role="status" aria-live="polite"></span>
+        </a>
+        <a class="button button--small" href="#contatti">Parliamone <span class="button__arrow" aria-hidden="true">↗</span></a>
+      </div>
+    </header>
+
+    <main id="main">
+      <section class="hero" id="inizio" aria-labelledby="hero-title">
+        <img class="hero__image" id="hero-image" src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=2200&q=85" alt="Scheda elettronica in fase di riparazione" fetchpriority="high" />
+        <div class="hero__inner">
+          <div class="hero__content">
+            <p class="eyebrow eyebrow--light" id="hero-eyebrow">ASSISTENZA TECNICA · RIPARAZIONI</p>
+            <h1 id="hero-title">La tecnologia torna a funzionare.</h1>
+            <p class="hero__intro" id="hero-intro">Smartphone, computer ed elettronica: individuiamo il guasto e ti proponiamo il percorso più adatto, prima di intervenire.</p>
+            <div class="hero__actions">
+              <a class="button button--lime" id="hero-action" href="catalogo.html?categoria=Riparazioni"><span id="hero-action-label">Scopri le riparazioni</span><span class="button__arrow" aria-hidden="true">↗</span></a>
+              <p class="hero__delivery"><strong id="hero-delivery-highlight">Smartphone, PC ed elettronica</strong><span id="hero-delivery-secondary">Diagnosi e preventivo prima di iniziare.</span></p>
+            </div>
+          </div>
+        </div>
+        <p class="hero__caption" id="hero-caption">RIPARAZIONI · ASSISTENZA TECNICA</p>
+        <div class="hero__controls" role="group" aria-label="Controlli della galleria">
+          <button class="hero__control" id="hero-previous" type="button" aria-label="Slide precedente" title="Slide precedente">←</button>
+          <button class="hero__control hero__control--play" id="hero-toggle" type="button" aria-label="Metti in pausa la galleria" aria-pressed="true" title="Metti in pausa la galleria">Ⅱ</button>
+          <button class="hero__control" id="hero-next" type="button" aria-label="Slide successiva" title="Slide successiva">→</button>
+          <span class="hero__counter" id="hero-slide-count" aria-live="polite">01 / 05</span>
+        </div>
+      </section>
+
+      <section class="capability-strip" aria-label="Aree di attività">
+        <div class="capability-strip__inner">
+          <p><span class="capability-strip__number">01</span><strong>Riparazioni</strong><span>Device ed elettronica</span></p>
+          <p><span class="capability-strip__number">02</span><strong>Servizi web</strong><span>Domini, hosting, siti, email</span></p>
+          <p><span class="capability-strip__number">03</span><strong>Automazioni</strong><span>Processi aziendali</span></p>
+          <p><span class="capability-strip__number">04</span><strong>Marketing</strong><span>Gestione digitale</span></p>
+        </div>
+      </section>
+
+      <section class="section-wrap" id="servizi" aria-labelledby="services-title">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">Cosa facciamo</p>
+            <h2 id="services-title">Dalla riparazione<br />al prossimo passo digitale.</h2>
+          </div>
+          <p class="section-heading__note">Un catalogo concreto di interventi e progetti: scegli un ambito e raccontaci cosa vuoi ottenere.</p>
+        </div>
+        <div class="service-grid" data-home-services>
+          <p class="load-status" id="service-load-status" role="status" aria-live="polite">Carico i servizi…</p>
+        </div>
+        <div class="section-action">
+          <a class="button" href="catalogo.html">Tutti i servizi <span class="button__arrow" aria-hidden="true">↗</span></a>
+        </div>
+      </section>
+
+      <section class="process-section" id="imprese" aria-labelledby="process-title">
+        <div class="process-section__inner">
+          <div>
+            <p class="eyebrow eyebrow--light">Per le imprese</p>
+            <h2 id="process-title">Meno passaggi manuali.<br />Più spazio al lavoro.</h2>
+            <p class="process-section__intro">Progettiamo automazioni e strumenti digitali partendo dai processi reali della tua attività: dai flussi ripetitivi alle applicazioni che tengono insieme il lavoro.</p>
+            <a class="button button--lime" href="prodotto.html?id=automazione-processi">Parliamo dei tuoi processi <span class="button__arrow" aria-hidden="true">↗</span></a>
+          </div>
+          <ol class="process-list">
+            <li><span class="process-list__number">01</span><strong>Capire il flusso</strong><span>Obiettivi, strumenti e attività ricorrenti.</span></li>
+            <li><span class="process-list__number">02</span><strong>Disegnare la soluzione</strong><span>Un progetto tecnico dimensionato sul caso.</span></li>
+            <li><span class="process-list__number">03</span><strong>Metterla al lavoro</strong><span>Implementazione e supporto da concordare.</span></li>
+          </ol>
+        </div>
+      </section>
+
+      <section class="voucher-band" id="buoni" aria-labelledby="voucher-title">
+        <div>
+          <p class="eyebrow">Un vantaggio che viaggia con te</p>
+          <h2 id="voucher-title">Hai un buono Cartaway?</h2>
+          <p>Inserisci il codice nella richiesta Colosso. Verificheremo la validità e lo sconto applicabile prima di confermare l'acquisto.</p>
+        </div>
+        <a class="button button--white" href="#contatti">Usa il tuo codice <span class="button__arrow" aria-hidden="true">↗</span></a>
+      </section>
+
+      <section class="packages-section" id="pacchetti" aria-labelledby="packages-title">
+        <div class="section-wrap">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">Continuità, senza sorprese</p>
+              <h2 id="packages-title">Pacchetti pensati<br />per durare.</h2>
+            </div>
+            <p class="section-heading__note">Le formule ricorrenti si costruiscono sulle necessità, sui servizi richiesti e sul livello di supporto. Canoni e condizioni vengono concordati prima dell'attivazione.</p>
+          </div>
+          <div class="package-grid" data-subscriptions>
+            <p class="load-status" role="status" aria-live="polite">Carico i pacchetti…</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="contact-section" id="contatti" aria-labelledby="contact-title">
+        <div class="contact-section__inner">
+          <div>
+            <p class="eyebrow">Il prossimo passo</p>
+            <h2 id="contact-title">Raccontaci cosa ti serve.</h2>
+            <p class="contact-section__intro" data-contact-note>Raccontaci cosa ti serve: valutiamo insieme il servizio o il pacchetto più adatto.</p>
+            <p class="contact-section__intro" data-coverage hidden></p>
+            <div class="contact-details" aria-label="Recapiti aziendali">
+              <a data-phone-link hidden></a>
+              <a data-email-link hidden></a>
+              <a data-whatsapp-link target="_blank" rel="noopener noreferrer" hidden>Scrivici su WhatsApp <span aria-hidden="true">↗</span></a>
+              <span class="contact-details__state" data-contact-state>Recapiti aziendali da configurare prima della pubblicazione.</span>
+              <span data-address hidden></span>
+            </div>
+          </div>
+
+          <form class="contact-form" id="contact-form">
+            <label class="field-label"><span>Nome</span><input name="name" type="text" autocomplete="name" maxlength="90" required /></label>
+            <label class="field-label"><span>Email <span>(facoltativa)</span></span><input name="email" type="email" autocomplete="email" maxlength="120" /></label>
+            <label class="field-label"><span>Servizio di interesse</span><select name="service"><option value="">Seleziona un servizio</option></select></label>
+            <label class="field-label"><span>Telefono <span>(facoltativo)</span></span><input name="phone" type="tel" autocomplete="tel" maxlength="30" /></label>
+            <label class="field-label field-label--wide"><span>Di cosa hai bisogno?</span><textarea name="message" rows="4" maxlength="1500" required></textarea></label>
+            <label class="field-label field-label--wide"><span>Codice buono Cartaway <span>(facoltativo)</span></span><input name="voucher" type="text" autocomplete="off" autocapitalize="characters" maxlength="80" placeholder="Inserisci il codice del tuo buono" /></label>
+            <p class="contact-form__note">Il codice viene verificato prima della conferma dello sconto. L'invio apre WhatsApp o il programma email configurato; il sito non elabora pagamenti.</p>
+            <p class="contact-form__status" id="contact-form-status" role="status" aria-live="polite"></p>
+            <button class="button button--lime" type="submit">Prepara la richiesta <span class="button__arrow" aria-hidden="true">↗</span></button>
+          </form>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="site-footer__main">
+        <div class="site-footer__brand">
+          <a class="brand brand--footer" href="index.html#inizio" aria-label="Colosso, torna all'inizio">
+            <span class="brand__mark" aria-hidden="true">C.</span>
+            <span class="brand__name" data-brand>Colosso</span>
+          </a>
+          <p class="site-footer__copy" data-tagline>Assistenza tecnica e soluzioni digitali, senza complicazioni.</p>
+        </div>
+        <div class="site-footer__contact-block">
+          <h2>Contatti</h2>
+          <a data-whatsapp-link target="_blank" rel="noopener noreferrer" hidden>Ordina su WhatsApp <span aria-hidden="true">↗</span></a>
+          <a data-phone-link hidden></a>
+          <a data-email-link hidden></a>
+          <p data-address hidden></p>
+        </div>
+      </div>
+      <section class="site-footer__legal" id="legal-details" aria-labelledby="legal-details-title">
+          <h2 id="legal-details-title">Dati dell'impresa</h2>
+          <dl id="legal-details-list"></dl>
+        </section>
+        <div class="site-footer__bottom">
+          <span>© <span data-current-year></span> <span data-brand>Colosso</span></span>
+          <span>Servizi e condizioni confermati prima dell'acquisto.</span>
+          <a href="#topline">Torna su <span aria-hidden="true">↑</span></a>
+        </div>
+    </footer>
+  </body>
+</html>

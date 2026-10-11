@@ -82,7 +82,7 @@ collections:
                 min: 0
                 step: 0.01
                 required: false
-                hint: Lascia vuoto per le offerte da preventivare.
+                hint: Tariffa indicativa di partenza; il sito la mostra con "Da". Lascia vuoto per le offerte da preventivare.
               - label: Periodo del prezzo
                 name: price_period
                 widget: select

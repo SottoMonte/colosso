@@ -6,6 +6,8 @@
       "category": "Riparazioni",
       "kind": "Intervento tecnico",
       "format": "Intervento su preventivo",
+      "price": 39,
+      "price_period": "una tantum",
       "description": "Diagnosi e riparazione di smartphone e tablet. Prima dell'intervento valutiamo il guasto e condividiamo la soluzione proposta.",
       "image": "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=1000&q=85",
       "specifications": [
@@ -21,6 +23,8 @@
       "category": "Riparazioni",
       "kind": "Intervento tecnico",
       "format": "Intervento su preventivo",
+      "price": 49,
+      "price_period": "una tantum",
       "description": "Assistenza hardware e software, configurazione e manutenzione di computer e postazioni di lavoro.",
       "image": "https://images.unsplash.com/photo-1587202372634-32705e3bf49c?auto=format&fit=crop&w=1000&q=85",
       "specifications": [
@@ -36,6 +40,8 @@
       "category": "Riparazioni",
       "kind": "Intervento tecnico",
       "format": "Valutazione su richiesta",
+      "price": 59,
+      "price_period": "una tantum",
       "description": "Valutazione di dispositivi elettronici e apparecchi domestici in base a marca, modello e tipo di guasto.",
       "image": "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1000&q=85",
       "specifications": [
@@ -51,6 +57,8 @@
       "category": "Servizi digitali",
       "kind": "Servizio continuativo",
       "format": "Soluzione su misura",
+      "price": 119,
+      "price_period": "annuale",
       "description": "Registrazione e gestione del dominio, hosting e supporto tecnico per la presenza online della tua attività.",
       "image": "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=1000&q=85",
       "specifications": [
@@ -66,6 +74,8 @@
       "category": "Servizi digitali",
       "kind": "Progetto",
       "format": "Progetto su misura",
+      "price": 790,
+      "price_period": "una tantum",
       "description": "Siti vetrina e soluzioni web progettati intorno ai contenuti, alle persone e agli obiettivi della tua attività.",
       "image": "https://images.unsplash.com/photo-1547658719-da2b51169166?auto=format&fit=crop&w=1000&q=85",
       "specifications": [
@@ -80,7 +90,9 @@
       "name": "Email professionale",
       "category": "Servizi digitali",
       "kind": "Servizio continuativo",
-      "format": "Configurazione su dominio",
+      "format": "Per casella, canone mensile",
+      "price": 5.9,
+      "price_period": "mensile",
       "description": "Caselle email con il dominio aziendale, configurazione dei dispositivi e supporto per la gestione quotidiana.",
       "image": "https://images.unsplash.com/photo-1523474253046-8cd2748b5fd2?auto=format&fit=crop&w=1000&q=85",
       "specifications": [
@@ -96,6 +108,8 @@
       "category": "Servizi digitali",
       "kind": "Progetto",
       "format": "Progetto su misura",
+      "price": 1200,
+      "price_period": "una tantum",
       "description": "Applicazioni e strumenti digitali pensati per organizzare informazioni e attività specifiche della tua impresa.",
       "image": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1000&q=85",
       "specifications": [
@@ -111,6 +125,8 @@
       "category": "Automazioni",
       "kind": "Progetto",
       "format": "Analisi e progetto su misura",
+      "price": 490,
+      "price_period": "una tantum",
       "description": "Individuiamo le attività ripetitive e progettiamo automazioni per ridurre passaggi manuali e collegare gli strumenti già in uso.",
       "image": "https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=1000&q=85",
       "specifications": [
@@ -126,6 +142,8 @@
       "category": "Marketing",
       "kind": "Servizio continuativo",
       "format": "Piano mensile o progetto",
+      "price": 290,
+      "price_period": "mensile",
       "description": "Supporto alla gestione della presenza digitale e delle attività di marketing, con obiettivi e canali da concordare.",
       "image": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1000&q=85",
       "specifications": [
@@ -141,6 +159,8 @@
       "category": "Abbonamenti",
       "kind": "Pacchetto in abbonamento",
       "format": "Canone ricorrente su misura",
+      "price": 79,
+      "price_period": "mensile",
       "description": "Un riferimento continuativo per l'assistenza tecnica di dispositivi e strumenti digitali. Perimetro e modalità si definiscono in base alle tue esigenze.",
       "image": "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=1000&q=85",
       "specifications": [
@@ -156,6 +176,8 @@
       "category": "Abbonamenti",
       "kind": "Pacchetto in abbonamento",
       "format": "Canone ricorrente su misura",
+      "price": 29,
+      "price_period": "mensile",
       "description": "Una formula personalizzabile per dominio, hosting, email e gestione del sito, con componenti e livello di supporto definiti in proposta.",
       "image": "https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?auto=format&fit=crop&w=1000&q=85",
       "specifications": [
@@ -171,6 +193,8 @@
       "category": "Abbonamenti",
       "kind": "Pacchetto in abbonamento",
       "format": "Canone ricorrente su misura",
+      "price": 149,
+      "price_period": "mensile",
       "description": "Un percorso continuativo per assistenza IT, automazioni e servizi digitali aziendali, costruito su obiettivi e priorità concordati.",
       "image": "https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1000&q=85",
       "specifications": [

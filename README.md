@@ -2,9 +2,9 @@
 
 Sito statico in italiano per un'attività di assistenza IT, riparazioni elettroniche e servizi digitali. La home presenta le aree di lavoro e i pacchetti; `catalogo.html` offre ricerca e filtri, mentre `prodotto.html?id=ID-SERVIZIO` mostra i dettagli. Contenuti, recapiti e offerte sono gestiti in JSON e modificabili tramite Decap CMS.
 
-Il carrello salva i servizi nel browser e permette di modificarne le quantità. L'invio prepara una richiesta d'ordine via WhatsApp, se configurato, oppure nell'app email; non raccoglie pagamenti. Gli importi sono gestiti nel CMS con `price` (euro) e `price_period` (`una tantum`, `mensile` o `annuale`); se il prezzo manca, il servizio resta da preventivare. I prezzi e la disponibilità vanno confermati prima dell'acquisto.
+Il carrello salva i servizi nel browser e permette di modificarne le quantità. L'invio prepara una richiesta d'ordine via WhatsApp, se configurato, oppure nell'app email; non raccoglie pagamenti. Gli importi gestiti nel CMS con `price` (euro) e `price_period` (`una tantum`, `mensile` o `annuale`) sono tariffe indicative di partenza e vengono mostrate con "Da"; se il prezzo manca, il servizio resta da preventivare. Prezzi, voci incluse, eventuale IVA e disponibilità vanno confermati prima dell'acquisto.
 
-Il codice di un buono Cartaway viene incluso nella richiesta perché Colosso ne verifichi validità e condizioni. Il sito non calcola né applica sconti in autonomia: per farlo occorre integrare una fonte autorevole condivisa con Cartaway, ad esempio un'API di verifica, oltre a definire le regole dei buoni.
+Nel carrello si può simulare lo sconto Cartaway inserendo il codice e l'importo riportato sul buono: la cifra viene sottratta dal totale iniziale stimato, senza scendere sotto zero. È solo una simulazione client-side; codice, validità, importo e condizioni devono essere verificati da Colosso e lo sconto non viene applicato a un pagamento. Per la verifica automatica occorrono regole definite e una fonte autorevole condivisa con Cartaway, ad esempio un'API.
 
 ## Avvio locale
 
@@ -19,12 +19,12 @@ Apri `http://localhost:4173`. Il CMS in `/admin` va configurato prima di consent
 ## Dati da completare
 
 - `data/site.json`: nome, presentazione, zona, recapiti e dati legali. I recapiti e i dati legali non sono stati inventati: inserirli e verificarli prima della pubblicazione.
-- `data/services.json`: riparazioni, servizi digitali, automazioni, marketing e pacchetti. Inserire nel CMS prezzi, periodi, descrizioni, condizioni, immagini e canoni approvati dall'azienda; i prezzi attualmente non sono stati forniti.
+- `data/services.json`: riparazioni, servizi digitali, automazioni, marketing e pacchetti. I prezzi presenti sono stime iniziali non ancora approvate dall'azienda: verificarli e aggiornarli nel CMS, insieme a periodi, voci incluse, condizioni, immagini e canoni, prima della pubblicazione.
 - Le immagini iniziali sono dimostrative e ospitate su Unsplash. Prima della pubblicazione, usare immagini approvate e verificare che rappresentino i servizi offerti.
 
 ## Buoni Cartaway
 
-Il campo “Codice buono Cartaway” trasmette il codice nella richiesta WhatsApp/email per la verifica da parte di Colosso. Per applicare automaticamente lo sconto durante un acquisto servono almeno: formato e regole dei codici, criteri di validità (scadenza, importo, cumulabilità e servizi ammessi) e un endpoint o archivio condiviso che ne confermi lo stato. Non validare i buoni soltanto nel browser: i dati client-side sono modificabili.
+Nel carrello si può simulare lo sconto Cartaway inserendo l'importo riportato sul buono; il codice è facoltativo per la simulazione e può essere inviato separatamente per la verifica. Il valore viene sottratto dal totale iniziale stimato, senza scendere sotto zero. È una simulazione client-side: validità, importo e condizioni devono essere verificati da Colosso e lo sconto non viene applicato a un pagamento. Per la verifica automatica servono regole definite e una fonte autorevole condivisa con Cartaway, ad esempio un'API; non validare i buoni soltanto nel browser.
 
 ## Pubblicazione e CMS
 

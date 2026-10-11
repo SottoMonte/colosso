@@ -10,7 +10,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="site.css?v=3" />
-    <script src="site.js?v=2" defer></script>
+    <script src="site.js?v=8" defer></script>
   </head>
   <body data-page="cart">
     <a class="skip-link" href="#main">Salta al contenuto</a>
@@ -94,8 +94,9 @@
             <label class="field-label"><span>Email <span>(facoltativa se inserisci il telefono)</span></span><input name="email" type="email" autocomplete="email" maxlength="120" /></label>
             <label class="field-label"><span>Telefono <span>(facoltativo se inserisci l'email)</span></span><input name="phone" type="tel" autocomplete="tel" maxlength="30" /></label>
             <label class="field-label"><span>Codice buono Cartaway <span>(facoltativo)</span></span><input name="voucher" type="text" autocomplete="off" autocapitalize="characters" maxlength="80" /></label>
+            <label class="field-label"><span>Valore sconto da simulare (€)</span><input id="voucher-discount" name="voucher_discount" type="number" min="0" step="0.01" inputmode="decimal" placeholder="0,00" aria-describedby="voucher-simulation-note" /></label>
+            <p class="cart-order-note" id="voucher-simulation-note">Per simulare basta inserire l'importo dello sconto. Il codice è facoltativo e serve solo per la verifica; la simulazione non applica lo sconto all'acquisto e non supera il totale iniziale.</p>
             <label class="field-label"><span>Note <span>(facoltative)</span></span><textarea name="notes" rows="3" maxlength="1200"></textarea></label>
-            <p class="cart-order-note">Il codice buono viene verificato separatamente; non modifica automaticamente il totale.</p>
             <p class="cart-order-status" id="cart-order-status" role="status" aria-live="polite"></p>
             <button class="button button--lime" type="submit">Invia richiesta d'ordine <span class="button__arrow" aria-hidden="true">↗</span></button>
           </form>

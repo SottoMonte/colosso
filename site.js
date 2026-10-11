@@ -99,7 +99,7 @@ function servicePriceText(service) {
   const cents = servicePriceCents(service);
   if (cents === null) return "Prezzo da definire";
   const period = servicePricePeriod(service);
-  return `${formatEuro(cents)}${period === "una tantum" ? " una tantum" : pricePeriodSuffix(period)}`;
+  return `Da ${formatEuro(cents)}${period === "una tantum" ? " una tantum" : pricePeriodSuffix(period)}`;
 }
 
 function serviceCard(service, index) {
@@ -168,6 +168,13 @@ function cartPriceTotals(entries) {
   return { totals, unpricedQuantity };
 }
 
+function cartVoucherDiscountCents(amount, initialTotal) {
+  const normalizedAmount = String(amount ?? "").trim();
+  const numericAmount = normalizedAmount ? Number(normalizedAmount) : Number.NaN;
+  if (!Number.isFinite(numericAmount) || numericAmount <= 0) return 0;
+  return Math.min(Math.round(numericAmount * 100), initialTotal);
+}
+
 function renderCart() {
   renderCartCount();
   const list = document.querySelector("#cart-items");
@@ -181,7 +188,7 @@ function renderCart() {
     const period = servicePricePeriod(service);
     const amount = cents === null
       ? "Da definire"
-      : `${formatEuro(cents * quantity)}${pricePeriodSuffix(period)}`;
+      : `Da ${formatEuro(cents * quantity)}${pricePeriodSuffix(period)}`;
     return `
       <article class="cart-line">
         <img class="cart-line__image" src="${escapeHtml(safeImageUrl(service.image))}" alt="" loading="lazy" decoding="async" />
@@ -214,24 +221,36 @@ function renderCart() {
   const totalRows = document.querySelector("#cart-totals");
   if (totalRows) {
     const periods = [...totals.keys()];
-    totalRows.innerHTML = periods.length
+    const breakdown = periods.length
       ? periods.map((period) => {
         const label = unpricedQuantity
           ? period === "una tantum" ? "Parziale una tantum" : `Parziale ${period}`
-          : periods.length === 1 && period === "una tantum"
-            ? "Totale"
-            : period === "mensile" ? "Canone mensile" : period === "annuale" ? "Canone annuale" : "Una tantum";
+          : period === "mensile" ? "Canone mensile da"
+            : period === "annuale" ? "Canone annuale da"
+              : periods.length === 1 ? "Totale da" : "Una tantum da";
         return `<p class="cart-total"><span>${escapeHtml(label)}</span><strong>${escapeHtml(formatEuro(totals.get(period)))}${escapeHtml(pricePeriodSuffix(period))}</strong></p>`;
       }).join("")
       : '<p class="cart-total"><span>Totale</span><strong>Da definire</strong></p>';
+    const initialTotal = [...totals.values()].reduce((sum, amount) => sum + amount, 0);
+    const discountInput = document.querySelector("#voucher-discount")?.value || "";
+    const discountCents = cartVoucherDiscountCents(discountInput, initialTotal);
+    const initialLabel = discountCents
+      ? unpricedQuantity ? "Totale parziale prima dello sconto" : "Totale prima dello sconto"
+      : unpricedQuantity ? "Totale iniziale parziale" : "Totale iniziale stimato";
+    const initialAmount = periods.length ? `Da ${formatEuro(initialTotal)}` : "Da definire";
+    const initialRow = `<p class="cart-total${discountCents ? "" : " cart-total--initial"}"><span>${escapeHtml(initialLabel)}</span><strong>${escapeHtml(initialAmount)}</strong></p>`;
+    const discountRows = discountCents
+      ? `<p class="cart-total cart-total--discount"><span>Sconto Cartaway simulato</span><strong>− ${escapeHtml(formatEuro(discountCents))}</strong></p><p class="cart-total cart-total--initial"><span>${unpricedQuantity ? "Totale parziale dopo lo sconto" : "Totale stimato dopo lo sconto"}</span><strong>Da ${escapeHtml(formatEuro(Math.max(0, initialTotal - discountCents)))}</strong></p>`
+      : "";
+    totalRows.innerHTML = `${breakdown}${initialRow}${discountRows}`;
   }
 
   const pricingNote = document.querySelector("#cart-pricing-note");
   if (pricingNote) {
-    pricingNote.hidden = unpricedQuantity === 0;
+    pricingNote.hidden = entries.length === 0;
     pricingNote.textContent = unpricedQuantity
-      ? `${unpricedQuantity} ${unpricedQuantity === 1 ? "quantità è" : "quantità sono"} senza prezzo: il totale è parziale e va confermato.`
-      : "Importi da confermare prima dell'acquisto.";
+      ? `Il totale iniziale somma le voci una tantum e il primo periodo dei canoni. È parziale: ${unpricedQuantity} ${unpricedQuantity === 1 ? "quantità è" : "quantità sono"} senza prezzo. Importi indicativi, da confermare nel preventivo.`
+      : "Il totale iniziale somma le voci una tantum e il primo periodo dei canoni. Prezzi indicativi; componenti, licenze ed eventuale IVA si confermano nel preventivo.";
   }
 }
 
@@ -281,20 +300,29 @@ function submitCartRequest(event) {
     const cents = servicePriceCents(service);
     const price = cents === null
       ? "prezzo da definire"
-      : `${formatEuro(cents)}${servicePricePeriod(service) === "una tantum" ? " una tantum" : pricePeriodSuffix(servicePricePeriod(service))}`;
+      : `da ${formatEuro(cents)}${servicePricePeriod(service) === "una tantum" ? " una tantum" : pricePeriodSuffix(servicePricePeriod(service))}`;
     return `- ${service.name} x ${quantity}: ${price}`;
   });
   const { totals, unpricedQuantity } = cartPriceTotals(entries);
   const totalLines = [...totals.entries()].map(([period, cents]) => {
-    const label = period === "mensile" ? "Totale mensile" : period === "annuale" ? "Totale annuale" : "Totale una tantum";
+    const label = period === "mensile" ? "Totale mensile da" : period === "annuale" ? "Totale annuale da" : "Totale una tantum da";
     return `${label}: ${formatEuro(cents)}${pricePeriodSuffix(period)}`;
   });
+  const initialTotal = [...totals.values()].reduce((sum, amount) => sum + amount, 0);
+  const voucherDiscountCents = cartVoucherDiscountCents(fields.get("voucher_discount"), initialTotal);
+  const initialTotalLabel = unpricedQuantity ? "Totale iniziale parziale" : "Totale iniziale stimato";
+  const initialTotalAmount = totals.size ? `da ${formatEuro(initialTotal)}` : "da definire";
   const message = [
     `Buongiorno ${state.site.brand || "Colosso"}, vorrei inviare una richiesta d'ordine.`,
     "",
     "Servizi:",
     ...lines,
     ...totalLines,
+    `${initialTotalLabel}: ${initialTotalAmount}`,
+    "Calcolato sommando le voci una tantum e il primo periodo dei canoni.",
+    voucherDiscountCents ? `Sconto Cartaway indicato: ${formatEuro(voucherDiscountCents)} (simulazione da verificare).` : "",
+    voucherDiscountCents ? `Totale stimato dopo lo sconto: da ${formatEuro(Math.max(0, initialTotal - voucherDiscountCents))} (simulazione).` : "",
+    "Importi indicativi di partenza, da confermare nel preventivo.",
     unpricedQuantity ? `${unpricedQuantity} quantità senza prezzo, da preventivare.` : "",
     "",
     `Nome: ${name}`,
@@ -340,7 +368,12 @@ function setupCart() {
   });
 
   const form = document.querySelector("#cart-order-form");
-  if (form) form.addEventListener("submit", submitCartRequest);
+  if (form) {
+    form.addEventListener("submit", submitCartRequest);
+    form.querySelectorAll('[name="voucher"], [name="voucher_discount"]').forEach((input) => {
+      input.addEventListener("input", renderCart);
+    });
+  }
   window.addEventListener("storage", (event) => {
     if (event.key !== cartStorageKey) return;
     state.cart = readCart();

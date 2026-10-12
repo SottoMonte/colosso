@@ -1813,11 +1813,23 @@ textarea:focus-visible {
   font-size: 17px;
 }
 
-.cart-quantity span {
-  min-width: 24px;
+.cart-quantity__input {
+  width: 52px;
+  height: 32px;
+  padding: 0 4px;
+  border: 1px solid var(--line);
+  border-radius: 0;
+  background: var(--white);
+  color: var(--ink);
+  font: inherit;
   font-size: 13px;
   font-variant-numeric: tabular-nums;
   text-align: center;
+}
+
+.cart-quantity__input:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 2px;
 }
 
 .cart-line__remove {

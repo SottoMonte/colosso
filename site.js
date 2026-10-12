@@ -199,7 +199,7 @@ function renderCart() {
           <div class="cart-line__controls">
             <div class="cart-quantity" role="group" aria-label="Quantità di ${escapeHtml(name)}">
               <button type="button" data-cart-change="-1" data-service-id="${id}" aria-label="Riduci ${escapeHtml(name)} di uno">−</button>
-              <span>${quantity}</span>
+              <input class="cart-quantity__input" type="number" min="0" max="99" step="1" inputmode="numeric" value="${quantity}" data-cart-quantity="true" data-service-id="${id}" aria-label="Quantità di ${escapeHtml(name)}" />
               <button type="button" data-cart-change="1" data-service-id="${id}" aria-label="Aumenta ${escapeHtml(name)} di uno">+</button>
             </div>
             <button class="cart-line__remove" type="button" data-cart-remove="${id}">Rimuovi</button>
@@ -365,6 +365,17 @@ function setupCart() {
     }
     const removeButton = target.closest("[data-cart-remove]");
     if (removeButton) setCartQuantity(removeButton.dataset.cartRemove, 0);
+  });
+
+  document.addEventListener("change", (event) => {
+    const target = event.target instanceof HTMLInputElement ? event.target : null;
+    if (!target?.matches("[data-cart-quantity]")) return;
+    const quantity = Number(target.value);
+    if (target.value === "" || !Number.isSafeInteger(quantity) || quantity < 0) {
+      target.value = String(state.cart[target.dataset.serviceId] || 1);
+      return;
+    }
+    setCartQuantity(target.dataset.serviceId, quantity);
   });
 
   const form = document.querySelector("#cart-order-form");

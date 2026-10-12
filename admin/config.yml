@@ -1,7 +1,7 @@
 backend:
   name: turbo-github
-  repo: "OWNER/REPOSITORY"
-  turbo_site_id: "SOSTITUISCI-CON-LA-SITE-ID-DECAP-TURBO"
+  repo: "SottoMonte/colosso"
+  turbo_site_id: "69939068-dce5-4aae-86f8-d15e67cd6f5e"
   branch: main
 
 locale: it

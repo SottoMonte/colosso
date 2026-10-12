@@ -1,7 +1,7 @@
 backend:
   name: turbo-github
   repo: "SottoMonte/colosso"
-  turbo_site_id: "69939068-dce5-4aae-86f8-d15e67cd6f5e"
+  turbo_site_id: "05f7d746-f4f4-4d88-a073-92226e46dd0d"
   branch: main
 
 locale: it

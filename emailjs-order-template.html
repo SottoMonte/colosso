@@ -1,0 +1,71 @@
+<div
+  style="
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    line-height: 1.5;
+    color: #192923;
+    padding: 16px 8px;
+    background-color: #f4f7f2;
+  "
+>
+  <div style="max-width: 600px; margin: auto; background-color: #fff">
+    <div style="border-top: 6px solid #183d32; padding: 16px; background-color: #fff">
+      <div style="display: inline-block; vertical-align: middle; margin-right: 8px; color: #183d32; font-size: 20px; font-weight: 800">{{to_name}}</div>
+      <span style="font-size: 16px; vertical-align: middle; border-left: 1px solid #d7dfd9; padding-left: 10px">
+        <strong>Nuova richiesta d'ordine</strong>
+      </span>
+    </div>
+
+    <div style="padding: 0 16px 20px">
+      <p style="margin-top: 0">
+        È arrivata una richiesta dal carrello. Non è stato effettuato alcun pagamento e l'ordine non è ancora confermato.
+      </p>
+
+      <div style="text-align: left; padding: 8px 0; border-bottom: 2px solid #183d32">
+        <strong>Servizi richiesti</strong>
+      </div>
+      <table role="presentation" style="width: 100%; border-collapse: collapse">
+        <tbody>
+          {{#orders}}
+          <tr style="vertical-align: top; border-bottom: 1px solid #e5e9e6">
+            <td style="padding: 12px 8px 12px 0; width: 100%">
+              <strong>{{name}}</strong>
+              <div style="color: #62736b; padding-top: 4px">Quantità: {{units}}</div>
+              <div style="color: #62736b; padding-top: 2px">Prezzo unitario indicativo: {{unit_price}}</div>
+              <div style="color: #49534c; padding-top: 6px; white-space: pre-line">{{unit_details}}</div>
+            </td>
+            <td style="padding: 12px 0 12px 8px; text-align: right; white-space: nowrap">
+              <strong>{{price}}</strong>
+            </td>
+          </tr>
+          {{/orders}}
+        </tbody>
+      </table>
+
+      <h2 style="font-size: 16px; margin: 22px 0 8px">Dati cliente</h2>
+      <table role="presentation" style="width: 100%; border-collapse: collapse">
+        <tr><td style="padding: 4px 8px 4px 0; color: #62736b">Nome</td><td style="padding: 4px 0">{{customer_name}}</td></tr>
+        <tr><td style="padding: 4px 8px 4px 0; color: #62736b">Email</td><td style="padding: 4px 0">{{customer_email}}</td></tr>
+        <tr><td style="padding: 4px 8px 4px 0; color: #62736b">Telefono</td><td style="padding: 4px 0">{{customer_phone}}</td></tr>
+      </table>
+
+      <h2 style="font-size: 16px; margin: 22px 0 8px">Buono Cartaway</h2>
+      <table role="presentation" style="width: 100%; border-collapse: collapse">
+        <tr><td style="padding: 4px 8px 4px 0; color: #62736b">Codice</td><td style="padding: 4px 0">{{voucher_code}}</td></tr>
+        <tr><td style="padding: 4px 8px 4px 0; color: #62736b">Valore inserito</td><td style="padding: 4px 0">{{voucher_discount_input}}</td></tr>
+        <tr><td style="padding: 4px 8px 4px 0; color: #62736b">Sconto simulato</td><td style="padding: 4px 0">{{voucher_discount_applied}}</td></tr>
+      </table>
+
+      <h2 style="font-size: 16px; margin: 22px 0 8px">Note</h2>
+      <div style="padding: 10px 12px; background-color: #f4f7f2; white-space: pre-wrap; word-break: break-word">{{notes}}</div>
+
+      <h2 style="font-size: 16px; margin: 22px 0 8px">Totali stimati</h2>
+      <div style="padding: 12px; border-top: 2px solid #183d32; background-color: #f4f7f2; white-space: pre-line; word-break: break-word">{{order_totals}}</div>
+      <p style="margin: 14px 0 0; color: #62736b; font-size: 12px">Verifica disponibilità, importi e condizioni prima di confermare l'ordine.</p>
+    </div>
+
+    <div style="padding: 12px 16px; border-top: 1px solid #d7dfd9; color: #62736b; font-size: 11px">
+      Messaggio generato automaticamente dal carrello {{to_name}}.
+    </div>
+  </div>
+</div>

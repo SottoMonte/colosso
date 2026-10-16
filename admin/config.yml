@@ -30,6 +30,14 @@ collections:
             required: false
             hint: Inserisci il numero completo con prefisso internazionale, solo cifre.
           - { label: Email di contatto, name: email, widget: string, required: false }
+          - label: Configurazione EmailJS
+            name: emailjs
+            widget: object
+            required: false
+            fields:
+              - { label: ID servizio, name: service_id, widget: string, required: false }
+              - { label: ID template, name: template_id, widget: string, required: false }
+              - { label: Chiave pubblica, name: public_key, widget: string, required: false }
           - label: Dati dell'impresa
             name: legal
             widget: object
@@ -102,5 +110,35 @@ collections:
                 fields:
                   - { label: Aspetto, name: label, widget: string }
                   - { label: Valore, name: value, widget: string }
+              - label: Campi aggiuntivi nel carrello
+                name: order_fields
+                widget: list
+                required: false
+                label_singular: campo
+                hint: Ogni quantità del servizio avrà un gruppo di campi separato nel carrello.
+                fields:
+                  - label: Nome interno
+                    name: name
+                    widget: string
+                    hint: Usa lettere, numeri, trattini o underscore senza spazi; deve essere univoco per questo servizio.
+                  - { label: Etichetta nel carrello, name: label, widget: string }
+                  - label: Tipo di campo
+                    name: type
+                    widget: select
+                    options:
+                      - text
+                      - textarea
+                      - email
+                      - tel
+                      - number
+                      - select
+                    default: text
+                  - label: Opzioni del menu (solo per select)
+                    name: options
+                    widget: list
+                    required: false
+                    field: { label: Opzione, name: option, widget: string }
+                  - { label: Testo guida, name: placeholder, widget: string, required: false }
+                  - { label: Campo obbligatorio, name: required, widget: boolean, default: false, required: false }
               - { label: Mostra in home, name: featured, widget: boolean, default: false }
               - { label: Disponibile, name: available, widget: boolean, default: true }

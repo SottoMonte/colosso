@@ -10,6 +10,11 @@
       "price_period": "una tantum",
       "description": "Prezzo di partenza per interventi semplici. Il costo finale dipende da modello e guasto; ricambi esclusi e preventivo approvato prima di procedere.",
       "image": "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=1000&q=85",
+      "order_fields": [
+        { "name": "problem_type", "label": "Tipo di problema", "type": "select", "placeholder": "Seleziona un'opzione", "options": ["Schermo", "Batteria", "Ricarica", "Software", "Altro"], "required": false },
+        { "name": "device_model", "label": "Marca e modello del dispositivo", "type": "text", "placeholder": "Es. iPhone 13 o Galaxy S23", "required": false },
+        { "name": "problem_description", "label": "Descrizione del problema", "type": "textarea", "placeholder": "Descrivi il guasto o l'intervento richiesto", "required": false }
+      ],
       "specifications": [
         { "label": "Dispositivi", "value": "Smartphone e tablet" },
         { "label": "Intervento", "value": "Diagnosi e riparazione con prezzo concordato" },
@@ -28,6 +33,10 @@
       "price_period": "una tantum",
       "description": "Prezzo indicativo per interventi semplici di software o manutenzione in laboratorio. Ricambi esclusi; riparazioni complesse e interventi a domicilio sono preventivati prima di procedere.",
       "image": "https://images.unsplash.com/photo-1587202372634-32705e3bf49c?auto=format&fit=crop&w=1000&q=85",
+      "order_fields": [
+        { "name": "computer_model", "label": "Marca e modello del PC o notebook", "type": "text", "placeholder": "Es. Dell Latitude 5440", "required": false },
+        { "name": "requested_work", "label": "Descrizione del problema o dell'intervento", "type": "textarea", "placeholder": "Descrivi cosa non funziona o cosa ti serve", "required": false }
+      ],
       "specifications": [
         { "label": "Dispositivi", "value": "PC desktop e notebook" },
         { "label": "Prezzo base", "value": "Da 49 € per interventi semplici in laboratorio" },
@@ -46,6 +55,10 @@
       "price_period": "una tantum",
       "description": "Per gli elettrodomestici, prezzo indicativo per uscita e diagnosi standard nell'area concordata. Riparazione, ricambi, urgenze e dispositivi elettronici sono quotati separatamente; costi e copertura si confermano prima dell'appuntamento.",
       "image": "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1000&q=85",
+      "order_fields": [
+        { "name": "appliance_model", "label": "Tipo e modello dell'apparecchio", "type": "text", "placeholder": "Marca e modello, se disponibili", "required": false },
+        { "name": "fault_description", "label": "Descrizione del guasto", "type": "textarea", "placeholder": "Descrivi il problema riscontrato", "required": false }
+      ],
       "specifications": [
         { "label": "Ambito", "value": "Elettrodomestici; elettronica valutata su richiesta" },
         { "label": "Incluso", "value": "Uscita e diagnosi standard, previa conferma della copertura" },

@@ -2,9 +2,15 @@
 
 Sito statico in italiano per un'attività di assistenza IT, riparazioni elettroniche e servizi digitali. La home presenta le aree di lavoro e i pacchetti; `catalogo.html` offre ricerca e filtri, mentre `prodotto.html?id=ID-SERVIZIO` mostra i dettagli. Contenuti, recapiti e offerte sono gestiti in JSON e modificabili tramite Decap CMS.
 
-Il carrello salva i servizi nel browser e permette di modificarne le quantità. L'invio prepara una richiesta d'ordine via WhatsApp, se configurato, oppure nell'app email; non raccoglie pagamenti. Gli importi gestiti nel CMS con `price` (euro) e `price_period` (`una tantum`, `mensile` o `annuale`) sono tariffe indicative di partenza e vengono mostrate con "Da"; se il prezzo manca, il servizio resta da preventivare. Prezzi, voci incluse, eventuale IVA e disponibilità vanno confermati prima dell'acquisto.
+Il carrello salva i servizi nel browser e permette di modificarne le quantità. L'invio spedisce la richiesta d'ordine con EmailJS all'indirizzo `email` in `data/site.json`; non raccoglie pagamenti. Gli importi gestiti nel CMS con `price` (euro) e `price_period` (`una tantum`, `mensile` o `annuale`) sono tariffe indicative di partenza e vengono mostrate con "Da"; se il prezzo manca, il servizio resta da preventivare. Prezzi, voci incluse, eventuale IVA e disponibilità vanno confermati prima dell'acquisto.
+
+Per raccogliere dettagli specifici, configura `order_fields` su ciascun servizio in `data/services.json` o nel CMS. Ogni campo può avere una chiave, un'etichetta, un tipo, un testo guida e l'indicazione se è obbligatorio. Per un campo `select`, aggiungi le voci in `options`; senza una selezione resta vuoto se il campo non è obbligatorio. Il carrello crea un gruppo distinto per ciascuna quantità, conserva i valori nel browser e li include nell'email sotto l'unità di servizio corrispondente.
 
 Nel carrello si può simulare lo sconto Cartaway inserendo il codice e l'importo riportato sul buono: la cifra viene sottratta dal totale iniziale stimato, senza scendere sotto zero. È solo una simulazione client-side; codice, validità, importo e condizioni devono essere verificati da Colosso e lo sconto non viene applicato a un pagamento. Per la verifica automatica occorrono regole definite e una fonte autorevole condivisa con Cartaway, ad esempio un'API.
+
+## Invio richieste d'ordine
+
+Inserisci in `data/site.json` gli ID `service_id` e `template_id` e la `public_key` del tuo account EmailJS, sotto `emailjs`. L'indirizzo destinatario viene letto dal campo `email`. Nella dashboard EmailJS apri il template configurato e imposta, nelle impostazioni del template, **To Email** esattamente su `{{to_email}}`, **Reply-To** su `{{reply_to}}` e **Subject** su `{{subject}}`; poi salva il template. Incolla il contenuto di `emailjs-order-template.html` nel campo HTML. Se l'invio restituisce `422` con "The recipients address is empty", controlla che **To Email** non sia vuoto e usi proprio `{{to_email}}`. Il template usa un ciclo `{{#orders}}` per mostrare le righe del carrello, più i dati cliente, Cartaway, note e totali tramite i rispettivi placeholder. La chiave pubblica è destinata all'uso nel browser; non inserire chiavi private nel sito e limita i domini autorizzati nelle impostazioni EmailJS.
 
 ## Avvio locale
 

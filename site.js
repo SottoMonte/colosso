@@ -1,6 +1,7 @@
 const fallbackImage =
   "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1000&q=85";
 const cartStorageKey = "colosso-cart-v1";
+const cartDetailsStorageKey = "colosso-cart-details-v1";
 const euroFormatter = new Intl.NumberFormat("it-IT", { style: "currency", currency: "EUR" });
 
 const state = {
@@ -8,6 +9,7 @@ const state = {
   site: {},
   services: [],
   cart: readCart(),
+  cartDetails: readCartDetails(),
   search: "",
   category: "tutte",
   sort: "featured",
@@ -60,12 +62,45 @@ function readCart() {
   }
 }
 
+function readCartDetails() {
+  try {
+    const stored = JSON.parse(window.localStorage.getItem(cartDetailsStorageKey) || "{}");
+    if (!stored || typeof stored !== "object" || Array.isArray(stored)) return {};
+    return Object.fromEntries(
+      Object.entries(stored)
+        .filter(([, units]) => Array.isArray(units))
+        .map(([serviceId, units]) => [
+          serviceId,
+          units.slice(0, 99).map((unit) => {
+            if (!unit || typeof unit !== "object" || Array.isArray(unit)) return {};
+            return Object.fromEntries(
+              Object.entries(unit)
+                .filter(([fieldName, value]) => /^[a-z][a-z0-9_-]*$/i.test(fieldName) && typeof value === "string")
+                .map(([fieldName, value]) => [fieldName, value.slice(0, 1200)]),
+            );
+          }),
+        ]),
+    );
+  } catch {
+    return {};
+  }
+}
+
 function saveCart() {
   try {
     window.localStorage.setItem(cartStorageKey, JSON.stringify(state.cart));
   } catch {
     const feedback = document.querySelector("#cart-feedback");
     if (feedback) feedback.textContent = "Il browser non ha potuto salvare il carrello su questo dispositivo.";
+  }
+}
+
+function saveCartDetails() {
+  try {
+    window.localStorage.setItem(cartDetailsStorageKey, JSON.stringify(state.cartDetails));
+  } catch {
+    const feedback = document.querySelector("#cart-feedback");
+    if (feedback) feedback.textContent = "Il browser non ha potuto salvare i dettagli del carrello su questo dispositivo.";
   }
 }
 
@@ -142,6 +177,40 @@ function cartEntries() {
     .filter(({ service }) => service && service.available !== false);
 }
 
+function syncCartDetailsToCart() {
+  state.cartDetails = Object.fromEntries(
+    Object.entries(state.cart).map(([serviceId, quantity]) => {
+      const savedUnits = Array.isArray(state.cartDetails[serviceId]) ? state.cartDetails[serviceId] : [];
+      return [serviceId, Array.from({ length: quantity }, (_, index) => savedUnits[index] || {})];
+    }),
+  );
+}
+
+function serviceOrderFields(service) {
+  const seenNames = new Set();
+  return (Array.isArray(service.order_fields) ? service.order_fields : []).flatMap((field) => {
+    if (!field || typeof field !== "object" || Array.isArray(field)) return [];
+    const name = String(field.name || "").trim();
+    const label = String(field.label || "").trim();
+    const allowedTypes = ["text", "textarea", "email", "tel", "number", "select"];
+    const type = allowedTypes.includes(field.type) ? field.type : "text";
+    const options = Array.isArray(field.options)
+      ? [...new Set(field.options.map((option) => String(option).trim()).filter(Boolean))].slice(0, 50)
+      : [];
+    if (!/^[a-z][a-z0-9_-]{0,63}$/i.test(name) || !label || seenNames.has(name) || (type === "select" && !options.length)) return [];
+    seenNames.add(name);
+    return [{
+      ...field,
+      name,
+      label,
+      type,
+      options,
+      placeholder: String(field.placeholder || ""),
+      required: field.required === true,
+    }];
+  });
+}
+
 function renderCartCount() {
   const quantity = Object.values(state.cart).reduce((total, itemQuantity) => total + itemQuantity, 0);
   const label = `Carrello, ${quantity} ${quantity === 1 ? "articolo" : "articoli"}`;
@@ -181,14 +250,49 @@ function renderCart() {
   if (!list) return;
 
   const entries = cartEntries();
+  const orderConfirmation = document.querySelector("#cart-order-confirmation");
+  if (orderConfirmation && entries.length > 0) orderConfirmation.hidden = true;
   list.innerHTML = entries.map(({ service, quantity }) => {
     const id = escapeHtml(String(service.id));
     const name = String(service.name || "Servizio Colosso");
+    const orderFields = serviceOrderFields(service);
     const cents = servicePriceCents(service);
     const period = servicePricePeriod(service);
     const amount = cents === null
       ? "Da definire"
       : `Da ${formatEuro(cents * quantity)}${pricePeriodSuffix(period)}`;
+    const detailGroups = orderFields.length
+      ? Array.from({ length: quantity }, (_, unitIndex) => {
+          const unitValues = state.cartDetails[service.id]?.[unitIndex] || {};
+          const fields = orderFields.map((field) => {
+            const fieldName = String(field.name).trim();
+            const fieldLabel = String(field.label).trim();
+            const fieldType = field.type;
+            const fieldId = escapeHtml(`cart-detail-${service.id}-${unitIndex}-${fieldName}`);
+            const fieldValue = String(unitValues[fieldName] ?? "");
+            const placeholder = escapeHtml(String(field.placeholder || ""));
+            const dataAttributes = `data-cart-detail="true" data-service-id="${id}" data-unit-index="${unitIndex}" data-field-name="${escapeHtml(fieldName)}"`;
+            const requiredAttribute = field.required === true ? " required" : "";
+            const optionalLabel = field.required === true ? "" : ' <span class="cart-detail-optional">(facoltativo)</span>';
+            const label = `<span>${escapeHtml(fieldLabel)}${optionalLabel}</span>`;
+            if (fieldType === "textarea") {
+              return `<label class="field-label cart-line__detail-field cart-line__detail-field--wide" for="${fieldId}">${label}<textarea id="${fieldId}" ${dataAttributes} maxlength="1200" placeholder="${placeholder}"${requiredAttribute}>${escapeHtml(fieldValue)}</textarea></label>`;
+            }
+            if (fieldType === "select") {
+              const options = field.options.map((option) => {
+                const escapedOption = escapeHtml(option);
+                const selected = fieldValue === option ? " selected" : "";
+                return `<option value="${escapedOption}"${selected}>${escapedOption}</option>`;
+              }).join("");
+              const emptyLabel = placeholder || escapeHtml("Seleziona un'opzione");
+              return `<label class="field-label cart-line__detail-field" for="${fieldId}">${label}<select id="${fieldId}" ${dataAttributes}${requiredAttribute}><option value="">${emptyLabel}</option>${options}</select></label>`;
+            }
+            return `<label class="field-label cart-line__detail-field" for="${fieldId}">${label}<input id="${fieldId}" type="${fieldType}" ${dataAttributes} maxlength="1200" value="${escapeHtml(fieldValue)}" placeholder="${placeholder}"${requiredAttribute} /></label>`;
+          }).join("");
+          const legend = quantity > 1 ? `Dati unità ${unitIndex + 1}` : "Dettagli del servizio";
+          return `<fieldset class="cart-line__details"><legend>${legend}</legend>${fields}</fieldset>`;
+        }).join("")
+      : "";
     return `
       <article class="cart-line">
         <img class="cart-line__image" src="${escapeHtml(safeImageUrl(service.image))}" alt="" loading="lazy" decoding="async" />
@@ -204,6 +308,7 @@ function renderCart() {
             </div>
             <button class="cart-line__remove" type="button" data-cart-remove="${id}">Rimuovi</button>
           </div>
+          ${detailGroups}
         </div>
         <strong class="cart-line__amount">${escapeHtml(amount)}</strong>
       </article>
@@ -258,28 +363,48 @@ function setCartQuantity(serviceId, quantity) {
   if (!Number.isSafeInteger(quantity)) return;
   if (quantity <= 0) {
     delete state.cart[serviceId];
+    delete state.cartDetails[serviceId];
   } else {
-    state.cart[serviceId] = Math.min(quantity, 99);
+    const adjustedQuantity = Math.min(quantity, 99);
+    const savedUnits = Array.isArray(state.cartDetails[serviceId]) ? state.cartDetails[serviceId] : [];
+    state.cart[serviceId] = adjustedQuantity;
+    state.cartDetails[serviceId] = Array.from({ length: adjustedQuantity }, (_, index) => savedUnits[index] || {});
   }
   saveCart();
+  saveCartDetails();
   renderCart();
 }
 
 function addToCart(serviceId) {
   const service = activeServices().find((item) => item.id === serviceId);
   if (!service) return;
-  state.cart[serviceId] = Math.min((state.cart[serviceId] || 0) + 1, 99);
-  saveCart();
-  renderCart();
+  setCartQuantity(serviceId, (state.cart[serviceId] || 0) + 1);
   const feedback = document.querySelector("#cart-feedback");
   if (feedback) feedback.textContent = `${service.name} aggiunto al carrello.`;
 }
 
-function submitCartRequest(event) {
+function saveCartDetailValue(target) {
+  if (!target.matches("[data-cart-detail]")) return;
+  const serviceId = target.dataset.serviceId;
+  const unitIndex = Number(target.dataset.unitIndex);
+  const fieldName = target.dataset.fieldName;
+  const service = state.services.find((item) => item.id === serviceId);
+  if (!service || !fieldName || !Number.isSafeInteger(unitIndex) || unitIndex < 0 || unitIndex >= (state.cart[serviceId] || 0)) return;
+  const field = serviceOrderFields(service).find((item) => item.name === fieldName);
+  if (!field || (field.type === "select" && target.value && !field.options.includes(target.value))) return;
+  state.cartDetails[serviceId] ||= [];
+  state.cartDetails[serviceId][unitIndex] ||= {};
+  state.cartDetails[serviceId][unitIndex][fieldName] = target.value.slice(0, 1200);
+  saveCartDetails();
+}
+
+async function submitCartRequest(event) {
   event.preventDefault();
   const form = event.currentTarget;
   const entries = cartEntries();
   const status = document.querySelector("#cart-order-status");
+  const submitButton = form.querySelector('button[type="submit"]');
+  if (submitButton?.disabled) return;
   if (!entries.length) {
     if (status) status.textContent = "Aggiungi almeno un servizio al carrello.";
     return;
@@ -291,61 +416,161 @@ function submitCartRequest(event) {
   const phone = String(fields.get("phone") || "").trim();
   const notes = String(fields.get("notes") || "").trim();
   const voucher = String(fields.get("voucher") || "").trim();
+  const voucherDiscountInput = String(fields.get("voucher_discount") || "").trim();
   if (!email && !phone) {
     if (status) status.textContent = "Inserisci un recapito email o telefono.";
     return;
   }
 
-  const lines = entries.map(({ service, quantity }) => {
+  let missingDetail;
+  for (const { service, quantity } of entries) {
+    for (let unitIndex = 0; unitIndex < quantity && !missingDetail; unitIndex += 1) {
+      const values = state.cartDetails[service.id]?.[unitIndex] || {};
+      const field = serviceOrderFields(service).find((item) => item.required && !String(values[item.name] || "").trim());
+      if (field) missingDetail = { service, unitIndex, field };
+    }
+    if (missingDetail) break;
+  }
+  if (missingDetail) {
+    const { service, unitIndex, field } = missingDetail;
+    if (status) status.textContent = `Completa "${field.label}" per ${service.name}, unità ${unitIndex + 1}.`;
+    document.getElementById(`cart-detail-${service.id}-${unitIndex}-${field.name}`)?.focus();
+    return;
+  }
+
+  const emailjsConfig = state.site.emailjs || {};
+  const destinationEmail = String(state.site.email || "").trim();
+  const serviceId = String(emailjsConfig.service_id || "").trim();
+  const templateId = String(emailjsConfig.template_id || "").trim();
+  const publicKey = String(emailjsConfig.public_key || "").trim();
+  if (!destinationEmail || !serviceId || !templateId || !publicKey) {
+    if (status) status.textContent = "Invio non configurato: completa l'email aziendale e i dati EmailJS in data/site.json.";
+    return;
+  }
+  const emailjsClient = window.emailjs;
+  if (typeof emailjsClient?.send !== "function") {
+    if (status) status.textContent = "Il servizio email non è disponibile. Ricarica la pagina e riprova.";
+    return;
+  }
+
+  const orders = entries.map(({ service, quantity }) => {
     const cents = servicePriceCents(service);
-    const price = cents === null
-      ? "prezzo da definire"
-      : `da ${formatEuro(cents)}${servicePricePeriod(service) === "una tantum" ? " una tantum" : pricePeriodSuffix(servicePricePeriod(service))}`;
-    return `- ${service.name} x ${quantity}: ${price}`;
+    const period = servicePricePeriod(service);
+    const suffix = period === "una tantum" ? " una tantum" : pricePeriodSuffix(period);
+    const configuredFields = serviceOrderFields(service);
+    const savedUnits = state.cartDetails[service.id] || [];
+    const unitDetails = configuredFields.length
+      ? Array.from({ length: quantity }, (_, unitIndex) => {
+          const values = savedUnits[unitIndex] || {};
+          const details = configuredFields
+            .map((field) => {
+              const value = String(values[field.name] ?? "").trim();
+              return value ? `${String(field.label).trim()}: ${value}` : "";
+            })
+            .filter(Boolean);
+          return `Unità ${unitIndex + 1}:\n${details.length ? details.join("\n") : "Nessun dettaglio inserito."}`;
+        }).join("\n\n")
+      : "";
+    return {
+      name: service.name || "Servizio Colosso",
+      units: quantity,
+      unit_price: cents === null ? "Da definire" : `Da ${formatEuro(cents)}${suffix}`,
+      price: cents === null ? "Da preventivare" : `Da ${formatEuro(cents * quantity)}${suffix}`,
+      unit_details: unitDetails,
+    };
   });
+  const lines = orders.map(({ name, units, price, unit_details }) => [
+    `- ${name} x ${units}: ${price}`,
+    unit_details ? unit_details.split("\n").map((line) => `  ${line}`).join("\n") : "",
+  ].filter(Boolean).join("\n"));
   const { totals, unpricedQuantity } = cartPriceTotals(entries);
   const totalLines = [...totals.entries()].map(([period, cents]) => {
     const label = period === "mensile" ? "Totale mensile da" : period === "annuale" ? "Totale annuale da" : "Totale una tantum da";
     return `${label}: ${formatEuro(cents)}${pricePeriodSuffix(period)}`;
   });
   const initialTotal = [...totals.values()].reduce((sum, amount) => sum + amount, 0);
-  const voucherDiscountCents = cartVoucherDiscountCents(fields.get("voucher_discount"), initialTotal);
+  const voucherDiscountCents = cartVoucherDiscountCents(voucherDiscountInput, initialTotal);
   const initialTotalLabel = unpricedQuantity ? "Totale iniziale parziale" : "Totale iniziale stimato";
   const initialTotalAmount = totals.size ? `da ${formatEuro(initialTotal)}` : "da definire";
+  const orderTotalLines = [
+    ...totalLines,
+    `${initialTotalLabel}: ${initialTotalAmount}`,
+    voucherDiscountInput ? `Valore sconto inserito: ${voucherDiscountInput} EUR.` : "Valore sconto da simulare: non indicato.",
+    voucherDiscountCents ? `Sconto Cartaway simulato: -${formatEuro(voucherDiscountCents)} (da verificare).` : "",
+    voucherDiscountCents ? `Totale stimato dopo lo sconto: da ${formatEuro(Math.max(0, initialTotal - voucherDiscountCents))} (simulazione).` : "",
+    unpricedQuantity ? `${unpricedQuantity} quantità senza prezzo, da preventivare.` : "",
+    "Importi indicativi di partenza, da confermare nel preventivo.",
+  ].filter(Boolean);
   const message = [
-    `Buongiorno ${state.site.brand || "Colosso"}, vorrei inviare una richiesta d'ordine.`,
+    `Nuova richiesta d'ordine per ${state.site.brand || "Colosso"}.`,
     "",
-    "Servizi:",
+    "Servizi richiesti:",
     ...lines,
+    "",
+    "Riepilogo economico:",
     ...totalLines,
     `${initialTotalLabel}: ${initialTotalAmount}`,
     "Calcolato sommando le voci una tantum e il primo periodo dei canoni.",
-    voucherDiscountCents ? `Sconto Cartaway indicato: ${formatEuro(voucherDiscountCents)} (simulazione da verificare).` : "",
+    voucherDiscountInput ? `Valore sconto da simulare inserito: ${voucherDiscountInput} EUR.` : "Valore sconto da simulare: non indicato.",
+    voucherDiscountCents ? `Sconto Cartaway simulato: ${formatEuro(voucherDiscountCents)} (da verificare).` : "",
     voucherDiscountCents ? `Totale stimato dopo lo sconto: da ${formatEuro(Math.max(0, initialTotal - voucherDiscountCents))} (simulazione).` : "",
     "Importi indicativi di partenza, da confermare nel preventivo.",
     unpricedQuantity ? `${unpricedQuantity} quantità senza prezzo, da preventivare.` : "",
     "",
+    "Dati del cliente:",
     `Nome: ${name}`,
-    email ? `Email: ${email}` : "",
-    phone ? `Telefono: ${phone}` : "",
-    notes ? `Note: ${notes}` : "",
-    voucher ? `Codice buono Cartaway: ${voucher} (da verificare)` : "",
+    `Email: ${email || "non fornita"}`,
+    `Telefono: ${phone || "non fornito"}`,
+    `Codice buono Cartaway: ${voucher || "non inserito"}${voucher ? " (da verificare)" : ""}`,
+    `Note: ${notes || "nessuna"}`,
     "",
-    "Confermate disponibilità, prezzi e condizioni prima dell'acquisto? Il sito non ha elaborato un pagamento.",
+    "Confermare disponibilità, prezzi e condizioni prima dell'acquisto. Il sito non ha elaborato un pagamento.",
   ].filter(Boolean).join("\n");
+  const templateParams = {
+    to_email: destinationEmail,
+    to_name: state.site.brand || "Colosso",
+    subject: `Richiesta d'ordine - ${state.site.brand || "Colosso"} - ${name}`,
+    reply_to: email || destinationEmail,
+    customer_name: name,
+    customer_email: email || "Non fornita",
+    customer_phone: phone || "Non fornito",
+    voucher_code: voucher || "Non inserito",
+    voucher_discount_input: voucherDiscountInput || "Non indicato",
+    voucher_discount_applied: formatEuro(voucherDiscountCents),
+    notes: notes || "Nessuna",
+    orders,
+    cart_items: lines.join("\n"),
+    order_totals: orderTotalLines.join("\n"),
+    message,
+  };
 
-  const whatsapp = String(state.site.whatsapp || "").replace(/\D/g, "");
-  const destinationEmail = String(state.site.email || "").trim();
-  if (whatsapp.length >= 8) {
-    window.location.assign(`https://wa.me/${whatsapp}?text=${encodeURIComponent(message)}`);
-    return;
+  if (status) status.textContent = "Invio richiesta in corso...";
+  if (submitButton) submitButton.disabled = true;
+  try {
+    await emailjsClient.send(serviceId, templateId, templateParams, { publicKey });
+    if (status) status.textContent = "";
+    form.reset();
+    state.cart = {};
+    state.cartDetails = {};
+    saveCart();
+    saveCartDetails();
+    renderCart();
+    const confirmation = document.querySelector("#cart-order-confirmation");
+    if (confirmation) {
+      confirmation.textContent = "Richiesta inviata correttamente. Il carrello è stato svuotato; ti ricontatteremo appena possibile.";
+      confirmation.hidden = false;
+    }
+  } catch (error) {
+    console.error("Invio della richiesta tramite EmailJS non riuscito.", error);
+    const missingRecipient = error?.status === 422 && /recipients address is empty/i.test(String(error?.text || ""));
+    if (status) {
+      status.textContent = missingRecipient
+        ? "Destinatario EmailJS mancante: nelle impostazioni del template imposta To Email su {{to_email}}."
+        : "Invio non riuscito. Riprova tra poco o contattaci usando i recapiti del sito.";
+    }
+  } finally {
+    if (submitButton) submitButton.disabled = false;
   }
-  if (destinationEmail) {
-    const subject = encodeURIComponent(`Richiesta d'ordine - ${state.site.brand || "Colosso"}`);
-    window.location.assign(`mailto:${destinationEmail}?subject=${subject}&body=${encodeURIComponent(message)}`);
-    return;
-  }
-  if (status) status.textContent = "Configura un recapito WhatsApp o email aziendale prima di inviare l'ordine.";
 }
 
 function setupCart() {
@@ -368,7 +593,12 @@ function setupCart() {
   });
 
   document.addEventListener("change", (event) => {
-    const target = event.target instanceof HTMLInputElement ? event.target : null;
+    const target = event.target;
+    if (target instanceof HTMLSelectElement && target.matches("[data-cart-detail]")) {
+      saveCartDetailValue(target);
+      return;
+    }
+    if (!(target instanceof HTMLInputElement)) return;
     if (!target?.matches("[data-cart-quantity]")) return;
     const quantity = Number(target.value);
     if (target.value === "" || !Number.isSafeInteger(quantity) || quantity < 0) {
@@ -376,6 +606,12 @@ function setupCart() {
       return;
     }
     setCartQuantity(target.dataset.serviceId, quantity);
+  });
+
+  document.addEventListener("input", (event) => {
+    const target = event.target;
+    if (!(target instanceof HTMLInputElement || target instanceof HTMLTextAreaElement)) return;
+    saveCartDetailValue(target);
   });
 
   const form = document.querySelector("#cart-order-form");
@@ -386,8 +622,10 @@ function setupCart() {
     });
   }
   window.addEventListener("storage", (event) => {
-    if (event.key !== cartStorageKey) return;
-    state.cart = readCart();
+    if (event.key !== cartStorageKey && event.key !== cartDetailsStorageKey) return;
+    if (event.key === cartStorageKey) state.cart = readCart();
+    state.cartDetails = readCartDetails();
+    syncCartDetailsToCart();
     renderCart();
   });
   renderCart();
@@ -693,7 +931,9 @@ async function initializeSite() {
     state.cart = Object.fromEntries(
       Object.entries(state.cart).filter(([id]) => activeServices().some((service) => service.id === id)),
     );
+    syncCartDetailsToCart();
     saveCart();
+    saveCartDetails();
     renderContactDetails();
     setupContactForm();
     renderCart();

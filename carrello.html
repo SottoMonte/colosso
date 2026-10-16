@@ -11,6 +11,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="site.css?v=3" />
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js" defer></script>
     <script src="site.js?v=8" defer></script>
   </head>
   <body data-page="cart">
@@ -69,6 +70,7 @@
         </div>
         <p class="cart-page__intro">Prezzi e disponibilità vengono confermati prima dell'acquisto. Le voci senza importo richiedono un preventivo.</p>
       </div>
+      <p class="cart-order-confirmation" id="cart-order-confirmation" role="status" aria-live="polite" hidden></p>
 
       <div class="cart-layout">
         <div class="cart-main">
